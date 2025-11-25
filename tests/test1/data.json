@@ -1,32 +1,22 @@
-{
-  "𝟷𝟸 𝙱𝚘𝚊𝚛𝚍 𝙱𝚘𝚘𝚜𝚝𝚎𝚛 𝙶𝚞𝚓𝚊𝚛𝚊𝚝𝚒 + 𝙶𝚄𝙹𝙲𝙴𝚃 𝟸𝟶𝟸𝟼": {
-    "tests": [
-      { "file": "tests/test1/data.json", "name": "TEST 1 PHY" },
-      { "file": "tests/test2/data.json", "name": "TEST 2 CHEM" },
-      { "file": "tests/kriva/test3/data.json", "name": "TEST 3 BIO" }
-    ]
-  },
-
-  "PENDING_1": {
-    "tests": [
-      { "file": "tests/lakshya/test1/data.json", "name": "TEST 1 PHY" },
-      { "file": "tests/lakshya/test2/data.json", "name": "TEST 2 CHEM" }
-    ]
-  },
-
-  "PENDING_2": {
-    "tests": [
-      { "file": "allen/test1/data.json", "name": "FIRE TEST 1 PHY" },
-      { "file": "tests/fire/test2/data.json", "name": "FIRE TEST 2 CHEM" },
-      { "file": "tests/fire/test3/data.json", "name": "FIRE TEST 3 BIO" }
-    ]
-  },
-
-  "PENDING_3": {
-    "tests": [
-      { "file": "kriva/test1/data.json", "name": "FIRE TEST 1 PHY" },
-      { "file": "kriva/test2/data.json", "name": "FIRE TEST 2 CHEM" },
-      { "file": "kriva/test3/data.json", "name": "FIRE TEST 3 BIO" }
-    ]
-  }
-}
+[
+  { "number": 1,  "image": "", "answer": "" },
+  { "number": 2,  "image": "", "answer": "" },
+  { "number": 3,  "image": "", "answer": "" },
+  { "number": 4,  "image": "", "answer": "" },
+  { "number": 5,  "image": "", "answer": "" },
+  { "number": 6,  "image": "", "answer": "" },
+  { "number": 7,  "image": "", "answer": "" },
+  { "number": 8,  "image": "", "answer": "" },
+  { "number": 9,  "image": "", "answer": "" },
+  { "number": 10, "image": "", "answer": "" },
+  { "number": 11, "image": "", "answer": "" },
+  { "number": 12, "image": "", "answer": "" },
+  { "number": 13, "image": "", "answer": "" },
+  { "number": 14, "image": "", "answer": "" },
+  { "number": 15, "image": "", "answer": "" },
+  { "number": 16, "image": "", "answer": "" },
+  { "number": 17, "image": "", "answer": "" },
+  { "number": 18, "image": "", "answer": "" },
+  { "number": 19, "image": "", "answer": "" },
+  { "number": 20, "image": "", "answer": "" }
+]
