@@ -1,7 +1,7 @@
 {
   "𝟷𝟸 𝙱𝚘𝚊𝚛𝚍 𝙱𝚘𝚘𝚜𝚝𝚎𝚛 𝙶𝚞𝚓𝚊𝚛𝚊𝚝𝚒 + 𝙶𝚄𝙹𝙲𝙴𝚃 𝟸𝟶𝟸𝟼": {
     "tests": [
-      { "file": "tests/test1/data.json", "name": "TEST 1 PHY" },
+      { "file": "tests/test1/data.json", "name": "DPP 1 PHY" },
       { "file": "tests/test2/data.json", "name": "TEST 2 CHEM" },
       { "file": "tests/kriva/test3/data.json", "name": "TEST 3 BIO" }
     ]
