@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PW TESTs</title>
+<title>PW TEST – AKDM PRO UI</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -13,110 +13,96 @@ body {
     font-family: Poppins, sans-serif;
     margin: 0;
     padding: 0;
+    background: #0a0a0a;
+    color: #eaeaea;
     min-height: 100vh;
-    background: #0d0d0d;
-    color: #eee;
-    overflow-x: hidden;
 }
 
-/* ------------------ PAGE LOADER ------------------ */
-#loader {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-    animation: fadeOut 2.8s forwards;
+/* ------------------ JOIN CHANNEL BUTTON ------------------ */
+.join-btn {
+    display: block;
+    width: 92%;
+    margin: 18px auto 10px;
+    text-align: center;
+    padding: 14px 0;
+    background: linear-gradient(135deg, #ff0059, #ff2f8d);
+    border-radius: 14px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 0 22px rgba(255, 0, 90, 0.45);
+    transition: 0.25s;
 }
 
-.loader-ring {
-    width: 80px;
-    height: 80px;
-    border: 6px solid rgba(255,255,255,0.25);
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
+.join-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 0, 120, 0.65);
 }
 
 /* ------------------ HEADER ------------------ */
 .header {
     text-align: center;
-    padding: 30px 20px 10px;
+    padding: 30px 20px 0;
 }
 
 .header img {
     width: 110px;
-    filter: drop-shadow(0 0 12px rgba(255,255,255,0.5));
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
 }
 
 .header h2 {
-    margin-top: 15px;
-    font-size: 32px;
     font-weight: 700;
-    letter-spacing: 1px;
-    color: #f0f0f0;
+    font-size: 30px;
+    margin-top: 10px;
 }
 
-/* ------------------ CARD DESIGN (Ultra Pro) ------------------ */
+/* ------------------ PREMIUM CARD ------------------ */
 .folder, .test {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin: 12px 18px;
     padding: 18px;
-    margin: 12px 20px;
-    border-radius: 20px;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 0 20px rgba(255,255,255,0.07);
-    font-size: 19px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 12px rgba(255,255,255,0.07), 
+                0 0 22px rgba(255,255,255,0.06);
     cursor: pointer;
+    font-size: 18px;
     transition: 0.25s ease;
-    color: #fafafa;
 }
 
 .folder:hover, .test:hover {
-    transform: translateY(-4px) scale(1.015);
-    background: rgba(255,255,255,0.18);
-    box-shadow: 0 0 25px rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-4px);
+    box-shadow: inset 0 0 18px rgba(255,255,255,0.15),
+                0 0 35px rgba(255,255,255,0.20);
 }
 
-/* ------------------ SELECTED HEADER ------------------ */
+/* ------------------ SELECTED TITLE ------------------ */
 #selectedFolder {
-    margin-top: 25px;
     text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: #fff;
+    margin-top: 20px;
+    font-size: 23px;
+    font-weight: 600;
 }
 </style>
 </head>
 
 <body>
 
-<!-- PAGE LOADER -->
-<div id="loader">
-    <div class="loader-ring"></div>
-</div>
+<!-- JOIN CHANNEL BUTTON -->
+<a class="join-btn" href="https://t.me/+NGUSfa7ns8c4OTll">JOIN OUR CHANNEL 🔥</a>
 
-<!-- HEADER -->
+<!-- HEADER SECTION -->
 <div class="header">
-    <img src="https://i.ibb.co/cST5TKKK/x.jpg" alt="PW Logo">  <!-- Replace image -->
-    <h2>PW TESTS – Ultra Pro</h2>
+    <img src="https://i.ibb.co/Q7zcpvfp/x.jpg" alt="PW Logo">
+    <h2>PW TESTS – AKDM PRO</h2>
 </div>
 
-<!-- CONTENT -->
+<!-- FOLDER LIST -->
 <div id="folderList"></div>
 
 <h2 id="selectedFolder"></h2>
@@ -127,7 +113,7 @@ fetch("manifest.json")
   .then(res => res.json())
   .then(data => {
       window.testManifest = data;
-      setTimeout(() => loadFolders(data), 2500);
+      loadFolders(data);
   });
 
 // Load folders
@@ -150,7 +136,7 @@ function openFolder(folderName) {
             html += `<div class="test" onclick="openTest('${test.file}')">📝 ${test.name}</div>`;
         });
     } else {
-        html = `<p style="text-align:center; color:#ccc;">No tests found.</p>`;
+        html = `<p style="text-align:center; color:#aaa;">No tests found.</p>`;
     }
     
     document.getElementById("testList").innerHTML = html;
