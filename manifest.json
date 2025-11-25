@@ -7,14 +7,14 @@
     ]
   },
 
-  "Lakshya": {
+  "PENDING": {
     "tests": [
       { "file": "tests/lakshya/test1/data.json", "name": "TEST 1 PHY" },
       { "file": "tests/lakshya/test2/data.json", "name": "TEST 2 CHEM" }
     ]
   },
 
-  "ALLEN TEST": {
+  "PENDING": {
     "tests": [
       { "file": "allen/test1/data.json", "name": "FIRE TEST 1 PHY" },
       { "file": "tests/fire/test2/data.json", "name": "FIRE TEST 2 CHEM" },
@@ -22,7 +22,7 @@
     ]
   },
 
-  "KRIVA EDUCATION TEST": {
+  "PENDING": {
     "tests": [
       { "file": "kriva/test1/data.json", "name": "FIRE TEST 1 PHY" },
       { "file": "kriva/test2/data.json", "name": "FIRE TEST 2 CHEM" },
