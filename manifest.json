@@ -1,9 +1,10 @@
 {
   "𝟷𝟸 𝙱𝚘𝚊𝚛𝚍 𝙱𝚘𝚘𝚜𝚝𝚎𝚛 𝙶𝚞𝚓𝚊𝚛𝚊𝚝𝚒 + 𝙶𝚄𝙹𝙲𝙴𝚃 𝟸𝟶𝟸𝟼": {
     "tests": [
-      { "file": "tests/test1/data.json", "name": "DPP 1 PHY Electric Charge and Electric Field" },
-      { "file": "tests/test2/data.json", "name": "DPP 2 PHY Electric Charge and Electric Field" },
-      { "file": "tests/test3/data.json", "name": "DPP 01 CHEM SOLUTION" }
+      { 
+        "file": "tests/test1/data.json", 
+        "name": "DEMO" 
+      }
     ]
   }
 }
