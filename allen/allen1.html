@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -81,6 +80,17 @@
     .correct { border: 3px solid #00ff6a !important; }
     .wrong { border: 3px solid #ff4d4d !important; }
 
+    .ansBox {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    .ansCorrect { background: #003f1a; color: #00ff77; }
+    .ansWrong { background: #3f0000; color: #ff5757; }
+
     #submitBtn {
         display: block;
         margin: 25px auto;
@@ -121,9 +131,6 @@
 </div>
 
 <script>
-/* ------------------------------------------
-    QUESTIONS ARRAY (SET ANSWERS HERE)
-------------------------------------------- */
 
 const questions = [
     {
@@ -142,20 +149,16 @@ let selectedAnswers = {};
 let timeLeft = 300;
 let timer;
 
-/* --------------------- TIMER SET POPUP -------------------- */
-
 window.onload = () => {
     let mins = prompt("⏱ Enter Timer Minutes:", "5");
-    if (mins) {
-        timeLeft = parseInt(mins) * 60;
-    }
-    document.body.style.display = "block"; // SHOW PAGE AFTER TIMER SET
+    if (mins) timeLeft = parseInt(mins) * 60;
+
+    document.body.style.display = "block";
     loadQuestions();
     startTimer();
     document.getElementById("submitBtn").style.display = "block";
 };
 
-/* ---------------------- LOAD QUESTIONS ---------------------- */
 
 function loadQuestions() {
     const quiz = document.getElementById("quizArea");
@@ -173,25 +176,22 @@ function loadQuestions() {
                 <div class="opt-btn" onclick="choose(${i}, 'C')" id="btn${i}C">C</div>
                 <div class="opt-btn" onclick="choose(${i}, 'D')" id="btn${i}D">D</div>
             </div>
+
+            <div id="ans${i}"></div>
         </div>`;
     });
 }
 
-/* -------------------- USER SELECT OPTION -------------------- */
-
 function choose(qIndex, option) {
     selectedAnswers[qIndex] = option;
 
-    // remove previous highlight
     ["A","B","C","D"].forEach(op => {
         document.getElementById(`btn${qIndex}${op}`).classList.remove("selected");
     });
 
-    // add tick highlight
     document.getElementById(`btn${qIndex}${option}`).classList.add("selected");
 }
 
-/* ------------------------- TIMER ------------------------- */
 
 function startTimer() {
     timer = setInterval(() => {
@@ -210,7 +210,6 @@ function startTimer() {
     }, 1000);
 }
 
-/* ------------------------- SUBMIT ------------------------- */
 
 function submitQuiz() {
     clearInterval(timer);
@@ -219,15 +218,27 @@ function submitQuiz() {
     let wrong = 0;
 
     questions.forEach((q, i) => {
-        let box = document.getElementById("box" + i);
         let userAns = selectedAnswers[i];
+        let ansDiv = document.getElementById("ans" + i);
+        let box = document.getElementById("box" + i);
 
         if (userAns === q.answer) {
             correct++;
             box.classList.add("correct");
+
+            ansDiv.innerHTML = `
+                <div class="ansBox ansCorrect">
+                    🟢 Correct Answer: ${q.answer}
+                </div>`;
         } else {
             wrong++;
             box.classList.add("wrong");
+
+            ansDiv.innerHTML = `
+                <div class="ansBox ansWrong">
+                    🔴 Your Answer: ${userAns ? userAns : "Not Attempted"} <br>
+                    🟢 Correct Answer: ${q.answer}
+                </div>`;
         }
     });
 
@@ -235,6 +246,7 @@ function submitQuiz() {
     document.getElementById("resultBox").innerHTML =
         `✔ Correct: ${correct} <br> ✖ Wrong: ${wrong}`;
 }
+
 </script>
 
 </body>
