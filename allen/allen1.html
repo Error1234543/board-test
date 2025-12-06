@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Pro Max Quiz Test</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #0e0f1a, #1a1d2e);
+        color: white;
+        overflow-x: hidden;
+    }
+
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 42px;
+        font-weight: 700;
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    /* Timer Box */
+    .timer-box {
+        text-align: center;
+        padding: 20px;
+        background: rgba(255,255,255,0.05);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+        animation: fadeIn 1s;
+    }
+
+    .timer-box input {
+        padding: 12px;
+        width: 120px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        margin-top: 10px;
+        outline: none;
+        text-align: center;
+    }
+
+    .timer-box button {
+        margin-top: 15px;
+        padding: 12px 25px;
+        background: linear-gradient(90deg, #6a11cb, #2575fc);
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 17px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .timer-box button:hover {
+        transform: scale(1.05);
+    }
+
+    /* Question Card */
+    .question {
+        background: rgba(255,255,255,0.08);
+        border-radius: 18px;
+        padding: 20px;
+        margin-bottom: 25px;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.1);
+        animation: slideUp 0.7s;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .question img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 12px;
+        border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    /* Options */
+    .option-box {
+        margin-bottom: 15px;
+    }
+
+    .hidden-radio {
+        display: none;
+    }
+
+    .option-img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 12px;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: 0.25s;
+        display: block;
+        margin: auto;
+        box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+
+    .option-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 18px rgba(0,150,255,0.6);
+    }
+
+    .correct {
+        border-color: #2ecc71 !important;
+        box-shadow: 0 0 15px rgba(46, 204, 113, 0.7);
+        background: rgba(46, 204, 113, 0.15);
+    }
+
+    .wrong {
+        border-color: #e74c3c !important;
+        box-shadow: 0 0 15px rgba(231, 76, 60, 0.7);
+        background: rgba(231, 76, 60, 0.15);
+    }
+
+    /* Submit */
+    #submitBtn {
+        padding: 15px;
+        width: 100%;
+        font-size: 20px;
+        background: linear-gradient(90deg, #ff416c, #ff4b2b);
+        border: none;
+        border-radius: 15px;
+        color: white;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: 0.3s;
+    }
+
+    #submitBtn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Result Box */
+    #result-box {
+        display: none;
+        padding: 25px;
+        background: rgba(255,255,255,0.1);
+        backdrop-filter: blur(12px);
+        border-radius: 18px;
+        margin-top: 30px;
+        text-align: center;
+        animation: fadeIn 1s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+</style>
+</head>
+
+<body>
+
+<h1>🔥 Pro Max Image Quiz</h1>
+
+<div class="container">
+
+    <div class="timer-box">
+        <h2>⏳ Set Your Timer</h2>
+        <input type="number" id="timerInput" placeholder="Minutes">
+        <br>
+        <button onclick="startTimer()">Start Test</button>
+        <h2 id="timerDisplay">Time Left: --:--</h2>
+    </div>
+
+    <div id="quizBox" style="display:none;">
+
+
+        <!-- =======================
+             QUESTION 1 TEMPLATE
+        ======================== -->
+        <div class="question">
+            <h2>Q1</h2>
+
+            <!-- Question Image -->
+            <img src="QUESTION1_IMAGE" alt="Q1">
+
+            <!-- Options -->
+            <div class="option-box">
+                <label>
+                    <input type="radio" class="hidden-radio" name="q1" value="A">
+                    <img src="OPTION1_A" class="option-img">
+                </label>
+            </div>
+
+            <div class="option-box">
+                <label>
+                    <input type="radio" class="hidden-radio" name="q1" value="B">
+                    <img src="OPTION1_B" class="option-img">
+                </label>
+            </div>
+
+            <div class="option-box">
+                <label>
+                    <input type="radio" class="hidden-radio" name="q1" value="C">
+                    <img src="OPTION1_C" class="option-img">
+                </label>
+            </div>
+
+            <div class="option-box">
+                <label>
+                    <input type="radio" class="hidden-radio" name="q1" value="D">
+                    <img src="OPTION1_D" class="option-img">
+                </label>
+            </div>
+        </div>
+
+        <!-- SAME TEMPLATE FOR Q2, Q3... (I can generate all 50 if you say) -->
+
+
+        <button id="submitBtn" onclick="submitQuiz()">SUBMIT TEST</button>
+
+    </div>
+
+    <div id="result-box"></div>
+</div>
+
+<script>
+let correctAnswers = {
+    q1: "A", // CHANGE CORRECT ANSWER HERE
+};
+
+let timer, timeLeft;
+
+function startTimer() {
+    let minutes = document.getElementById("timerInput").value;
+    if (minutes <= 0) return alert("Enter valid minutes!");
+
+    document.getElementById("quizBox").style.display = "block";
+
+    timeLeft = minutes * 60;
+    timer = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    let m = Math.floor(timeLeft / 60);
+    let s = timeLeft % 60;
+
+    document.getElementById("timerDisplay").innerText =
+        `Time Left: ${m}:${s < 10 ? "0" + s : s}`;
+
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        submitQuiz();
+    }
+
+    timeLeft--;
+}
+
+function submitQuiz() {
+    clearInterval(timer);
+
+    let correct = 0, wrong = 0, total = Object.keys(correctAnswers).length;
+
+    for (let q in correctAnswers) {
+        let radios = document.getElementsByName(q);
+
+        radios.forEach(r => {
+            let img = r.nextElementSibling;
+
+            if (r.value === correctAnswers[q]) {
+                img.classList.add("correct");
+            }
+
+            if (r.checked) {
+                if (r.value === correctAnswers[q]) correct++;
+                else {
+                    img.classList.add("wrong");
+                    wrong++;
+                }
+            }
+
+            r.disabled = true;
+        });
+    }
+
+    document.getElementById("result-box").style.display = "block";
+    document.getElementById("result-box").innerHTML = `
+        <h2>📊 Final Result</h2>
+        <h3>✔ Correct: ${correct}</h3>
+        <h3>❌ Wrong: ${wrong}</h3>
+        <h3>📘 Total Questions: ${total}</h3>
+    `;
+}
+</script>
+
+</body>
+</html>
