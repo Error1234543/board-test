@@ -1,151 +1,141 @@
+
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PW TEST</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn X Pro | Electric Blue Thunder</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #000814, #001933 60%, #000814);
+      color: #d0e7ff;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    /* Lightning */
+    .lightning {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: repeating-linear-gradient(120deg, transparent, transparent 20%, rgba(0,195,255,0.05) 21%);
+      animation: flash 3s infinite;
+      z-index: 0;
+    }
+    @keyframes flash { 0%,90%,100%{opacity:0;} 50%{opacity:1;} }
 
-<style>
-/* ------------------ GLOBAL ------------------ */
-body {
-    font-family: Poppins, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: #0a0a0a;
-    color: #eaeaea;
-    min-height: 100vh;
-}
+    /* Logo */
+    .SONIC {
+      font-size: 2.4rem; font-weight: bold;
+      color: #00d4ff;
+      text-shadow: 0 0 15px #00eaff, 0 0 25px #00aaff;
+      animation: glow 2s infinite alternate;
+      margin-bottom: 1.5rem; text-align: center; z-index: 2;
+    }
+    @keyframes glow {
+      0%{text-shadow:0 0 15px #00bfff;} 
+      100%{text-shadow:0 0 40px #00eaff;}
+    }
 
-/* ------------------ JOIN CHANNEL BUTTON ------------------ */
-.join-btn {
-    display: block;
-    width: 92%;
-    margin: 18px auto 10px;
-    text-align: center;
-    padding: 14px 0;
-    background: linear-gradient(135deg, #ff0059, #ff2f8d);
-    border-radius: 14px;
-    font-size: 18px;
-    font-weight: 700;
-    text-decoration: none;
-    color: white;
-    box-shadow: 0 0 22px rgba(255, 0, 90, 0.45);
-    transition: 0.25s;
-}
+    h2 { color:#00c8ff; font-size:2rem; text-shadow:0 0 15px #00eaff; z-index:2; }
 
-.join-btn:hover {
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 0, 120, 0.65);
-}
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      gap: 2rem;
+      width: 100%; max-width: 1200px; z-index: 2;
+    }
 
-/* ------------------ HEADER ------------------ */
-.header {
-    text-align: center;
-    padding: 30px 20px 0;
-}
+    /* Cards */
+    .card {
+      background: linear-gradient(145deg, #00182e, #002b55);
+      border: 2px solid #00eaff;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 0 20px rgba(0,238,255,0.25);
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 40px rgba(0,238,255,0.7);
+      border-color: #33ccff;
+    }
+    .card h3 { color:#00eaff; text-shadow:0 0 10px #00bfff; }
 
-.header img {
-    width: 110px;
-    margin-bottom: 5px;
-    filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
-}
+    footer { margin-top:3rem; color:#78caff; text-align:center; }
 
-.header h2 {
-    font-weight: 700;
-    font-size: 30px;
-    margin-top: 10px;
-}
+    /* Popup */
+    .popup {
+      position: fixed; top:0; left:0; width:100%; height:100%;
+      background: rgba(0,10,30,0.96);
+      display:flex; justify-content:center; align-items:center;
+      z-index:999; opacity:0; visibility:hidden; transition:0.4s ease;
+    }
+    .popup.active { opacity:1; visibility:visible; }
+    .popup-content {
+      background:#001933; border:2px solid #00d4ff; border-radius:15px;
+      padding:2rem; width:90%; max-width:500px;
+      box-shadow:0 0 30px rgba(0,238,255,0.4);
+      max-height:90vh; overflow-y:auto; text-align:center;
+    }
+    .links a {
+      display:block; margin:6px 0; padding:10px 12px;
+      text-decoration:none; color:#ccefff;
+      background:#002244; border:1px solid #00d4ff; border-radius:10px;
+      transition:0.3s;
+    }
+    .links a:hover { background:#00eaff; color:#00182e; font-weight:bold; box-shadow:0 0 20px #00eaff; }
+    .close-btn {
+      background:#00eaff; color:#00182e; border:none; padding:10px 20px;
+      border-radius:10px; font-weight:bold; margin-top:15px; cursor:pointer;
+    }
 
-/* ------------------ PREMIUM CARD ------------------ */
-.folder, .test {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    margin: 12px 18px;
-    padding: 18px;
-    border-radius: 18px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    box-shadow: inset 0 0 12px rgba(255,255,255,0.07), 
-                0 0 22px rgba(255,255,255,0.06);
-    cursor: pointer;
-    font-size: 18px;
-    transition: 0.25s ease;
-}
-
-.folder:hover, .test:hover {
-    background: rgba(255,255,255,0.14);
-    transform: translateY(-4px);
-    box-shadow: inset 0 0 18px rgba(255,255,255,0.15),
-                0 0 35px rgba(255,255,255,0.20);
-}
-
-/* ------------------ SELECTED TITLE ------------------ */
-#selectedFolder {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 23px;
-    font-weight: 600;
-}
-</style>
+    /* Telegram */
+    .tg-popup {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; z-index:1000;
+    }
+    .tg-box {
+      background:#001933; border:2px solid #00d4ff; border-radius:15px; padding:2rem; width:90%; max-width:400px; text-align:center; color:#ccefff;
+    }
+    .tg-buttons a, .tg-buttons button {
+      background:#00eaff; color:#00182e; padding:10px 20px; border:none; border-radius:10px; font-weight:bold; margin:10px; cursor:pointer;
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- JOIN CHANNEL BUTTON -->
-<a class="join-btn" href="https://t.me/+NGUSfa7ns8c4OTll">JOIN OUR CHANNEL </a>
+  <div class="lightning"></div>
 
-<!-- HEADER SECTION -->
-<div class="header">
-    <img src="https://i.ibb.co/yF2Cq6nM/x.jpg" alt="PW Logo">
-    <h2> STD 12 SCIENCE GUJARAT BOARD TESTS</h2>
+  <!-- Telegram Popup -->
+  <div class="tg-popup" id="tg-popup">
+    <div class="tg-box">
+      <h3>⚡ Join our Telegram Channel</h3>
+      <p>Get updates & electric blue notes instantly!</p>
+      <div class="tg-buttons">
+        <a href="https://t.me/+NGUSfa7ns8c4OTll" target="_blank">Join Channel</a>
+        <button onclick="closeTG()">Dismiss ❌</button>
+      </div>
+    </div>
+  </div>
+<!-- 🔹 Owner Contact Button (Centered Top) -->
+<div style="position:fixed; top:15px; left:50%; transform:translateX(-50%); z-index:999;">
+  <a href="https://t.me/Batmandmbot" target="_blank"
+     style="background:#00eaff; color:#00182e; font-weight:bold; 
+            padding:10px 18px; border-radius:10px; text-decoration:none; 
+            box-shadow:0 0 15px rgba(0,238,255,0.7); transition:0.3s;">
+    ⚡ Owner Contact
+  </a>
 </div>
 
-<!-- FOLDER LIST -->
-<div id="folderList"></div>
-
-<h2 id="selectedFolder"></h2>
-<div id="testList"></div>
-
-<script>
-fetch("manifest.json")
-  .then(res => res.json())
-  .then(data => {
-      window.testManifest = data;
-      loadFolders(data);
-  });
-
-// Load folders
-function loadFolders(data) {
-    let html = "";
-    Object.keys(data).forEach(folder => {
-        html += `<div class="folder" onclick="openFolder('${folder}')">📁 ${folder}</div>`;
-    });
-    document.getElementById("folderList").innerHTML = html;
-}
-
-// Open folder
-function openFolder(folderName) {
-    let data = window.testManifest[folderName];
-    document.getElementById("selectedFolder").innerText = folderName + " – Tests";
-
-    let html = "";
-    if (data && data.tests) {
-        data.tests.forEach(test => {
-            html += `<div class="test" onclick="openTest('${test.file}')">📝 ${test.name}</div>`;
-        });
-    } else {
-        html = `<p style="text-align:center; color:#aaa;">No tests found.</p>`;
-    }
-    
-    document.getElementById("testList").innerHTML = html;
-}
-
-function openTest(path) {
-    window.location.href = "quiz.html?test=" + path;
-}
-</script>
-
-</body>
-</html>
+<h3>💠 LEARN X PRO</h3>
