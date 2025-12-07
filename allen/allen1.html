@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔥 Pro Max Quiz Test</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>🔥 Pro Max Quiz Test</title>  
 
-<style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">  
+
+<style>  
     body {
         margin: 0;
         padding: 0;
@@ -17,7 +18,7 @@
         display: none;
     }
 
-    /* ---------- TIMER MODAL ---------- */
+    /* TIMER MODAL */
     #timeModal {
         position: fixed;
         top: 0;
@@ -78,7 +79,6 @@
         cursor: pointer;
     }
 
-    /* QUIZ DESIGN SAME AS BEFORE */
     .container {
         max-width: 900px;
         margin: auto;
@@ -97,31 +97,36 @@
         width: 100%;
         border-radius: 10px;
         margin-bottom: 10px;
+        display: none;
     }
 
     .options {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
         gap: 15px;
         margin-top: 10px;
-        flex-wrap: wrap;
     }
 
     .opt-btn {
-        flex: 1;
         padding: 12px;
         background: #222;
         border: 2px solid #555;
         border-radius: 12px;
-        text-align: center;
-        font-size: 18px;
+        text-align: left;
+        font-size: 17px;
         cursor: pointer;
         transition: .3s;
         position: relative;
+        padding-left: 40px;
     }
 
-    .opt-btn:hover {
-        border-color: #7b2fff;
-        transform: scale(1.05);
+    .opt-btn::before {
+        content: attr(data-op);
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: bold;
     }
 
     .selected {
@@ -154,7 +159,7 @@
     .ansWrong { background: #3f0000; color: #ff5757; }
 
     #submitBtn {
-        display: block;
+        display: none;
         margin: 25px auto;
         padding: 15px 40px;
         background: #00c6ff;
@@ -164,7 +169,6 @@
         font-size: 20px;
         cursor: pointer;
         font-weight: bold;
-        display: none;
     }
 
     #timerBox {
@@ -185,11 +189,11 @@
 
 <body>
 
-<!-- 🔥 TIMER MODAL BOX -->
+<!-- TIMER MODAL -->
 <div id="timeModal">
     <div class="modal-box">
         <h2>⏱ SET YOUR TEST TIME</h2>
-        <input type="number" id="timeInput" class="time-input" placeholder="Enter minutes" inputmode="numeric">
+        <input type="number" id="timeInput" class="time-input" placeholder="Enter minutes">
         <button class="start-btn" onclick="startTest()">START TEST</button>
     </div>
 </div>
@@ -203,10 +207,33 @@
 
 <script>
 
+/* ---------------- JSON: ADD YOUR QUESTIONS HERE ---------------- */
+
 const questions = [
-    { number: 1, image: "https://files.catbox.moe/p05t9b.jpg", answer: "A" },
-    { number: 2, image: "https://files.catbox.moe/abcd12.jpg", answer: "D" }
+    {
+        number: 1,
+        q: "Photosynthesis mainly occurs in which part of the leaf?",
+        A: "Xylem",
+        B: "Phloem",
+        C: "Chloroplast",
+        D: "Cuticle",
+        answer: "C",
+        image: ""  
+    },
+
+    {
+        number: 2,
+        q: "Force is measured in?",
+        A: "Joule",
+        B: "Newton",
+        C: "Watt",
+        D: "Pascal",
+        answer: "B",
+        image: ""
+    }
 ];
+
+/* -------------------------------------------------------------- */
 
 let selectedAnswers = {};
 let timeLeft = 0;
@@ -218,7 +245,6 @@ window.onload = () => {
 
 function startTest() {
     let mins = document.getElementById("timeInput").value;
-
     if (!mins || mins <= 0) {
         alert("Please enter valid minutes!");
         return;
@@ -231,7 +257,7 @@ function startTest() {
     startTimer();
     document.getElementById("submitBtn").style.display = "block";
 
-    document.documentElement.requestFullscreen(); // FULLSCREEN → URL BAR HIDE
+    document.documentElement.requestFullscreen();
 }
 
 function loadQuestions() {
@@ -239,16 +265,19 @@ function loadQuestions() {
     quiz.innerHTML = "";
 
     questions.forEach((q, i) => {
+
+        let imgTag = q.image ? `<img src="${q.image}" class="question-img" style="display:block">` : "";
+
         quiz.innerHTML += `
         <div class="question-box" id="box${i}">
-            <h2>Q${q.number}</h2>
-            <img src="${q.image}" class="question-img">
+            <h2>Q${q.number}. ${q.q}</h2>
+            ${imgTag}
 
             <div class="options">
-                <div class="opt-btn" onclick="choose(${i}, 'A')" id="btn${i}A">A</div>
-                <div class="opt-btn" onclick="choose(${i}, 'B')" id="btn${i}B">B</div>
-                <div class="opt-btn" onclick="choose(${i}, 'C')" id="btn${i}C">C</div>
-                <div class="opt-btn" onclick="choose(${i}, 'D')" id="btn${i}D">D</div>
+                <div class="opt-btn" onclick="choose(${i}, 'A')" id="btn${i}A" data-op="A">${q.A}</div>
+                <div class="opt-btn" onclick="choose(${i}, 'B')" id="btn${i}B" data-op="B">${q.B}</div>
+                <div class="opt-btn" onclick="choose(${i}, 'C')" id="btn${i}C" data-op="C">${q.C}</div>
+                <div class="opt-btn" onclick="choose(${i}, 'D')" id="btn${i}D" data-op="D">${q.D}</div>
             </div>
 
             <div id="ans${i}"></div>
@@ -258,9 +287,11 @@ function loadQuestions() {
 
 function choose(qIndex, option) {
     selectedAnswers[qIndex] = option;
+
     ["A","B","C","D"].forEach(op => {
         document.getElementById(`btn${qIndex}${op}`).classList.remove("selected");
     });
+
     document.getElementById(`btn${qIndex}${option}`).classList.add("selected");
 }
 
@@ -276,6 +307,7 @@ function startTimer() {
             clearInterval(timer);
             submitQuiz();
         }
+
         timeLeft--;
     }, 1000);
 }
