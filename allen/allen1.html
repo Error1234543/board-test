@@ -14,9 +14,71 @@
         font-family: "Poppins", sans-serif;
         background: #000;
         color: #fff;
-        display: none; /* PAGE HIDE UNTIL TIMER SET */
+        display: none;
     }
 
+    /* ---------- TIMER MODAL ---------- */
+    #timeModal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.92);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .modal-box {
+        background: #111;
+        padding: 25px;
+        width: 85%;
+        max-width: 350px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 0 18px rgba(123,47,255,0.5);
+        animation: zoom .4s ease;
+    }
+
+    @keyframes zoom {
+        from { transform: scale(0.6); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-box h2 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .time-input {
+        width: 100%;
+        padding: 12px;
+        font-size: 22px;
+        color: #fff;
+        background: #000;
+        border: 2px solid #7b2fff;
+        border-radius: 10px;
+        outline: none;
+        text-align: center;
+    }
+
+    .start-btn {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background: #00c6ff;
+        border: none;
+        color: #000;
+        border-radius: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    /* QUIZ DESIGN SAME AS BEFORE */
     .container {
         max-width: 900px;
         margin: auto;
@@ -123,6 +185,15 @@
 
 <body>
 
+<!-- 🔥 TIMER MODAL BOX -->
+<div id="timeModal">
+    <div class="modal-box">
+        <h2>⏱ SET YOUR TEST TIME</h2>
+        <input type="number" id="timeInput" class="time-input" placeholder="Enter minutes" inputmode="numeric">
+        <button class="start-btn" onclick="startTest()">START TEST</button>
+    </div>
+</div>
+
 <div class="container">
     <div id="timerBox">⏳ Time Left: <span id="timer">00:00</span></div>
     <div id="quizArea"></div>
@@ -133,32 +204,35 @@
 <script>
 
 const questions = [
-    {
-        number: 1,
-        image: "https://files.catbox.moe/p05t9b.jpg",
-        answer: "A"
-    },
-    {
-        number: 2,
-        image: "https://files.catbox.moe/abcd12.jpg",
-        answer: "D"
-    }
+    { number: 1, image: "https://files.catbox.moe/p05t9b.jpg", answer: "A" },
+    { number: 2, image: "https://files.catbox.moe/abcd12.jpg", answer: "D" }
 ];
 
 let selectedAnswers = {};
-let timeLeft = 300;
+let timeLeft = 0;
 let timer;
 
 window.onload = () => {
-    let mins = prompt("⏱ Enter Timer Minutes:", "5");
-    if (mins) timeLeft = parseInt(mins) * 60;
-
     document.body.style.display = "block";
+};
+
+function startTest() {
+    let mins = document.getElementById("timeInput").value;
+
+    if (!mins || mins <= 0) {
+        alert("Please enter valid minutes!");
+        return;
+    }
+
+    timeLeft = mins * 60;
+    document.getElementById("timeModal").style.display = "none";
+
     loadQuestions();
     startTimer();
     document.getElementById("submitBtn").style.display = "block";
-};
 
+    document.documentElement.requestFullscreen(); // FULLSCREEN → URL BAR HIDE
+}
 
 function loadQuestions() {
     const quiz = document.getElementById("quizArea");
@@ -184,14 +258,11 @@ function loadQuestions() {
 
 function choose(qIndex, option) {
     selectedAnswers[qIndex] = option;
-
     ["A","B","C","D"].forEach(op => {
         document.getElementById(`btn${qIndex}${op}`).classList.remove("selected");
     });
-
     document.getElementById(`btn${qIndex}${option}`).classList.add("selected");
 }
-
 
 function startTimer() {
     timer = setInterval(() => {
@@ -199,23 +270,20 @@ function startTimer() {
         let s = timeLeft % 60;
 
         document.getElementById("timer").innerText =
-            `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 
         if (timeLeft <= 0) {
             clearInterval(timer);
             submitQuiz();
         }
-
         timeLeft--;
     }, 1000);
 }
 
-
 function submitQuiz() {
     clearInterval(timer);
 
-    let correct = 0;
-    let wrong = 0;
+    let correct = 0, wrong = 0;
 
     questions.forEach((q, i) => {
         let userAns = selectedAnswers[i];
@@ -225,20 +293,14 @@ function submitQuiz() {
         if (userAns === q.answer) {
             correct++;
             box.classList.add("correct");
-
-            ansDiv.innerHTML = `
-                <div class="ansBox ansCorrect">
-                    🟢 Correct Answer: ${q.answer}
-                </div>`;
+            ansDiv.innerHTML = `<div class="ansBox ansCorrect">🟢 Correct Answer: ${q.answer}</div>`;
         } else {
             wrong++;
             box.classList.add("wrong");
-
-            ansDiv.innerHTML = `
-                <div class="ansBox ansWrong">
-                    🔴 Your Answer: ${userAns ? userAns : "Not Attempted"} <br>
-                    🟢 Correct Answer: ${q.answer}
-                </div>`;
+            ansDiv.innerHTML = `<div class="ansBox ansWrong">
+                🔴 Your Answer: ${userAns ? userAns : "Not Attempted"} <br>
+                🟢 Correct Answer: ${q.answer}
+            </div>`;
         }
     });
 
