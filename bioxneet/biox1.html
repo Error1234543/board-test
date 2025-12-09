@@ -99,10 +99,11 @@
         display: none;
     }
 
+    /* ⭐ OPTIONS SINGLE COLUMN ⭐ */
     .options {
-        display: grid;
-        grid-template-columns: repeat(2,1fr);
-        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
         margin-top: 10px;
     }
 
@@ -205,7 +206,6 @@
 </div>
 
 <script>
-
 /* ---------------- JSON: ADD YOUR QUESTIONS HERE ---------------- */
 
 const questions = [
