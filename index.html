@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAD X SONIC</title>
+
   <style>
     body {
       font-family: "Poppins", sans-serif;
@@ -20,7 +20,7 @@
       min-height: 100vh;
     }
 
-    /* Lightning */
+    /* Lightning Layer */
     .lightning {
       position: absolute;
       top: 0; left: 0;
@@ -29,29 +29,29 @@
       animation: flash 3s infinite;
       z-index: 0;
     }
-    @keyframes flash { 0%,90%,100%{opacity:0;} 50%{opacity:1;} }
+    @keyframes flash { 
+      0%,90%,100%{opacity:0;} 
+      50%{opacity:1;} 
+    }
 
-    /* Logo */
-    .SONIC {
-      font-size: 2.4rem; font-weight: bold;
+    h3 {
+      font-size: 2.5rem;
+      font-weight: bold;
       color: #00d4ff;
       text-shadow: 0 0 15px #00eaff, 0 0 25px #00aaff;
-      animation: glow 2s infinite alternate;
-      margin-bottom: 1.5rem; text-align: center; z-index: 2;
+      z-index: 2;
+      margin-bottom: 2rem;
+      text-align: center;
     }
-    @keyframes glow {
-      0%{text-shadow:0 0 15px #00bfff;} 
-      100%{text-shadow:0 0 40px #00eaff;}
-    }
-
-    h2 { color:#00c8ff; font-size:2rem; text-shadow:0 0 15px #00eaff; z-index:2; }
 
     /* Grid */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
-      width: 100%; max-width: 1200px; z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      z-index: 2;
     }
 
     /* Cards */
@@ -70,115 +70,158 @@
       box-shadow: 0 0 40px rgba(0,238,255,0.7);
       border-color: #33ccff;
     }
-    .card h3 { color:#00eaff; text-shadow:0 0 10px #00bfff; }
-
-    footer { margin-top:3rem; color:#78caff; text-align:center; }
+    .card h3 {
+      color: #00eaff;
+      text-shadow: 0 0 10px #00bfff;
+    }
 
     /* Popup */
     .popup {
-      position: fixed; top:0; left:0; width:100%; height:100%;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       background: rgba(0,10,30,0.96);
-      display:flex; justify-content:center; align-items:center;
-      z-index:999; opacity:0; visibility:hidden; transition:0.4s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.4s ease;
     }
-    .popup.active { opacity:1; visibility:visible; }
+    .popup.active {
+      opacity: 1;
+      visibility: visible;
+    }
     .popup-content {
-      background:#001933; border:2px solid #00d4ff; border-radius:15px;
-      padding:2rem; width:90%; max-width:500px;
-      box-shadow:0 0 30px rgba(0,238,255,0.4);
-      max-height:90vh; overflow-y:auto; text-align:center;
+      background: #001933;
+      border: 2px solid #00d4ff;
+      border-radius: 15px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 0 30px rgba(0,238,255,0.4);
+      max-height: 90vh;
+      overflow-y: auto;
+      text-align: center;
     }
     .links a {
-      display:block; margin:6px 0; padding:10px 12px;
-      text-decoration:none; color:#ccefff;
-      background:#002244; border:1px solid #00d4ff; border-radius:10px;
-      transition:0.3s;
+      display: block;
+      margin: 6px 0;
+      padding: 10px 12px;
+      text-decoration: none;
+      color: #ccefff;
+      background: #002244;
+      border: 1px solid #00d4ff;
+      border-radius: 10px;
+      transition: 0.3s;
     }
-    .links a:hover { background:#00eaff; color:#00182e; font-weight:bold; box-shadow:0 0 20px #00eaff; }
+    .links a:hover {
+      background: #00eaff;
+      color: #00182e;
+      font-weight: bold;
+      box-shadow: 0 0 20px #00eaff;
+    }
     .close-btn {
-      background:#00eaff; color:#00182e; border:none; padding:10px 20px;
-      border-radius:10px; font-weight:bold; margin-top:15px; cursor:pointer;
+      background: #00eaff;
+      color: #00182e;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      margin-top: 15px;
+      cursor: pointer;
     }
 
-    /* Telegram */
-    .tg-popup {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      background:rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; z-index:1000;
-    }
-    .tg-box {
-      background:#001933; border:2px solid #00d4ff; border-radius:15px; padding:2rem; width:90%; max-width:400px; text-align:center; color:#ccefff;
-    }
-    .tg-buttons a, .tg-buttons button {
-      background:#00eaff; color:#00182e; padding:10px 20px; border:none; border-radius:10px; font-weight:bold; margin:10px; cursor:pointer;
+    footer {
+      margin-top: 3rem;
+      color: #78caff;
+      text-align: center;
+      z-index: 2;
     }
   </style>
 </head>
 <body>
 
+<div class="lightning"></div>
 
 <h3>💠 LEARN X PRO</h3>
 
-
-
-
-<!-- Main Grid -->
+<!-- MAIN GRID -->
 <div class="grid">
 
-  <!-- Internal Tests -->
-  <div class="card" onclick="openPopup('ALLEN')"><h3>ALEXA TESTS </h3></div>
+  <div class="card" onclick="openPopup('ALLEN')">
+    <h3>ALEXA TESTS</h3>
+  </div>
 
-<div class="card" onclick="openPopup('bioxneet')"><h3>BIO ALEXA TEST</h3></div>
+  <div class="card" onclick="openPopup('bioxneet')">
+    <h3>BIO ALEXA TEST</h3>
+  </div>
 
-<div class="card" onclick="openPopup('yakeen')"><h3>YAKEEN TEST</h3></div>
+  <div class="card" onclick="openPopup('yakeen')">
+    <h3>YAKEEN TEST</h3>
+  </div>
 
+</div>
+
+
+
+<!-- POPUP - ALLEN -->
 <div class="popup" id="popup-ALLEN">
   <div class="popup-content">
     <h2>ALEXA TEST</h2>
-    <div class="links">
 
-      <a href="allen/allen1.html">🧾 TEST 1 </a>
-  </div>
-<button class="close-btn" onclick="closePopup('ALLEN')">❌ CLOSE</button>
+    <div class="links">
+      <a href="allen/allen1.html">🧾 TEST 1</a>
+    </div>
+
+    <button class="close-btn" onclick="closePopup('ALLEN')">❌ CLOSE</button>
   </div>
 </div>
 
 
 
+<!-- POPUP - BIO X NEET -->
 <div class="popup" id="popup-bioxneet">
   <div class="popup-content">
-    <h2> BIO ALEXA TEST</h2>
+    <h2>BIO ALEXA TEST</h2>
+
     <div class="links">
+      <a href="bioxneet/biox1.html">Animal Kingdom</a>
+      <a href="allen/allen2.html">Anatomy Of Flowering Plants</a>
+    </div>
 
-      <a href="bioxneet/biox1.html">Animal Kingdom </a>
-  <a href="allen/allen2.html">Anatomy Of Flowering Plants </a>
-  </div>
-
-   <button class="close-btn" onclick="closePopup('bioxneet')">❌ CLOSE</button>
+    <button class="close-btn" onclick="closePopup('bioxneet')">❌ CLOSE</button>
   </div>
 </div>
 
 
+
+<!-- POPUP - YAKEEN -->
 <div class="popup" id="popup-yakeen">
   <div class="popup-content">
-    <h2> YAKEEN GUJARATI 2026</h2>
+    <h2>YAKEEN GUJARATI 2026</h2>
+
     <div class="links">
+      <a href="yakeen/test1.html">TEST 1</a>
+    </div>
 
-<a href="yakeen/test1.html">TEST 1 </a>
-
- <button class="close-btn" onclick="closePopup('yakeen')">❌ CLOSE</button>
+    <button class="close-btn" onclick="closePopup('yakeen')">❌ CLOSE</button>
   </div>
 </div>
 
-  <footer>© 2025 XD TEAM</footer>
 
-  <script>
-    function openPopup(type){ document.getElementById("popup-"+type).classList.add("active"); }
-    function closePopup(type){ document.getElementById("popup-"+type).classList.remove("active"); }
-    function closeTG(){ document.getElementById("tg-popup").style.display="none"; }
-    window.onload=function(){ setTimeout(()=>{document.getElementById("tg-popup").style.display="flex";},1200); }
-  </script>
+
+<footer>© 2025 XD TEAM</footer>
+
+<script>
+  function openPopup(id) {
+    document.getElementById("popup-" + id).classList.add("active");
+  }
+  function closePopup(id) {
+    document.getElementById("popup-" + id).classList.remove("active");
+  }
+</script>
 
 </body>
 </html>
-
-     
