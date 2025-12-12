@@ -1,152 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MAD X SONIC</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Learn X Pro Tests</title>
 
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at top, #000814, #001933 60%, #000814);
-      color: #d0e7ff;
-      margin: 0;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-    /* Lightning Layer */
-    .lightning {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: repeating-linear-gradient(120deg, transparent, transparent 20%, rgba(0,195,255,0.05) 21%);
-      animation: flash 3s infinite;
-      z-index: 0;
-    }
-    @keyframes flash { 
-      0%,90%,100%{opacity:0;} 
-      50%{opacity:1;} 
-    }
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background: radial-gradient(circle, #00111f, #00070f);
+    color: white;
+    text-align: center;
+  }
 
-    h3 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #00d4ff;
-      text-shadow: 0 0 15px #00eaff, 0 0 25px #00aaff;
-      z-index: 2;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+  /* TOP BUTTONS */
+  .top-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-top: 10px;
+  }
 
-    /* Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      width: 100%;
-      max-width: 1200px;
-      z-index: 2;
-    }
+  .top-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0088cc;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 174, 255, 0.5);
+    transition: 0.3s;
+  }
 
-    /* Cards Updated Smaller */
-    .card {
-      background: linear-gradient(145deg, #00182e, #002b55);
-      border: 2px solid #00eaff;
-      border-radius: 15px;
-      padding: 1.2rem;
-      box-shadow: 0 0 20px rgba(0,238,255,0.25);
-      text-align: center;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 40px rgba(0,238,255,0.7);
-      border-color: #33ccff;
-    }
-    .card h4 {
-      font-size: 1.3rem;   /* smaller text */
-      font-weight: 600;
-      color: #00eaff;
-      text-shadow: 0 0 10px #00bfff;
-      margin: 0;
-    }
+  .top-btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 0 25px rgba(0, 174, 255, 0.8);
+  }
 
-    /* Popup */
-    .popup {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,10,30,0.96);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      opacity: 0;
-      visibility: hidden;
-      transition: 0.4s ease;
-    }
-    .popup.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .popup-content {
-      background: #001933;
-      border: 2px solid #00d4ff;
-      border-radius: 15px;
-      padding: 2rem;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 0 30px rgba(0,238,255,0.4);
-      max-height: 90vh;
-      overflow-y: auto;
-      text-align: center;
-    }
-    .links a {
-      display: block;
-      margin: 6px 0;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: #ccefff;
-      background: #002244;
-      border: 1px solid #00d4ff;
-      border-radius: 10px;
-      transition: 0.3s;
-    }
-    .links a:hover {
-      background: #00eaff;
-      color: #00182e;
-      font-weight: bold;
-      box-shadow: 0 0 20px #00eaff;
-    }
-    .close-btn {
-      background: #00eaff;
-      color: #00182e;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      margin-top: 15px;
-      cursor: pointer;
-    }
+  .top-btn img {
+    width: 22px;
+  }
 
-    footer {
-      margin-top: 3rem;
-      color: #78caff;
-      text-align: center;
-      z-index: 2;
-    }
-  </style>
+  /* SMALL TITLE */
+  h3 {
+    font-size: 1.4rem;
+    margin-top: 5px;
+    text-shadow: 0 0 15px #00bfff;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    padding: 20px;
+    margin-top: 10px;
+  }
+
+  .card {
+    background: linear-gradient(145deg, #00182e, #002b55);
+    border: 2px solid #00eaff;
+    border-radius: 15px;
+    padding: 1.2rem;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 238, 255, 0.25);
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 35px rgba(0,238,255,0.7);
+    border-color: #33ccff;
+  }
+
+  .card h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00bfff;
+  }
+
+  /* POPUP */
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .popup.active {
+    display: flex;
+  }
+
+  .popup-content {
+    background: #001a33;
+    padding: 25px;
+    border-radius: 15px;
+    width: 85%;
+    max-width: 350px;
+    border: 2px solid #00eaff;
+    box-shadow: 0 0 35px rgba(0,238,255,0.7);
+  }
+
+  .popup-content h2 {
+    margin-top: 0;
+    color: #00eaff;
+    text-shadow: 0 0 10px #00bfff;
+  }
+
+  .links a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: #003b66;
+    border: 1px solid #00eaff;
+    transition: 0.3s;
+  }
+
+  .links a:hover {
+    background: #005c99;
+  }
+
+  .close-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ff004c;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .close-btn:hover {
+    background: #ff3369;
+  }
+
+  footer {
+    margin-top: 30px;
+    padding-bottom: 25px;
+    opacity: 0.8;
+  }
+
+</style>
 </head>
+
 <body>
 
-<div class="lightning"></div>
+<!-- TOP TELEGRAM BUTTONS -->
+<div class="top-buttons">
+  <a class="top-btn" href="https://t.me/+NGUSfa7ns8c4OTll" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+    Join Channel
+  </a>
+
+  <a class="top-btn" href="https://t.me/xdsonic" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
+    Owner Contact
+  </a>
+</div>
 
 <h3>💠 LEARN X PRO</h3>
 
@@ -167,8 +198,6 @@
 
 </div>
 
-
-
 <!-- POPUP - ALLEN -->
 <div class="popup" id="popup-ALLEN">
   <div class="popup-content">
@@ -181,8 +210,6 @@
     <button class="close-btn" onclick="closePopup('ALLEN')">❌ CLOSE</button>
   </div>
 </div>
-
-
 
 <!-- POPUP - BIO X NEET -->
 <div class="popup" id="popup-bioxneet">
@@ -198,8 +225,6 @@
   </div>
 </div>
 
-
-
 <!-- POPUP - YAKEEN -->
 <div class="popup" id="popup-yakeen">
   <div class="popup-content">
@@ -212,8 +237,6 @@
     <button class="close-btn" onclick="closePopup('yakeen')">❌ CLOSE</button>
   </div>
 </div>
-
-
 
 <footer>© 2025 XD TEAM</footer>
 
