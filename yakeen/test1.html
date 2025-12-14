@@ -1,195 +1,138 @@
-<!DOCTYPE html>  
-<html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  
-<title>🔥 Pro Max Quiz Test</title>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔥 Pro Max Quiz Test</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">  
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>  
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        background: #000;
-        color: #fff;
-        display: none;
-    }
-
-    /* TIMER MODAL */
-    #timeModal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.92);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-    }
-
-    .modal-box {
-        background: #111;
-        padding: 25px;
-        width: 85%;
-        max-width: 350px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 0 18px rgba(123,47,255,0.5);
-        animation: zoom .4s ease;
-    }
-
-    @keyframes zoom {
-        from { transform: scale(0.6); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
-
-    .modal-box h2 {
-        font-size: 22px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-
-    .time-input {
-        width: 100%;
-        padding: 12px;
-        font-size: 22px;
-        color: #fff;
-        background: #000;
-        border: 2px solid #7b2fff;
-        border-radius: 10px;
-        outline: none;
-        text-align: center;
-    }
-
-    .start-btn {
-        margin-top: 20px;
-        width: 100%;
-        padding: 12px;
-        background: #00c6ff;
-        border: none;
-        color: #000;
-        border-radius: 10px;
-        font-size: 20px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .container {
-        max-width: 900px;
-        margin: auto;
-        padding: 20px;
-    }
-
-    .question-box {
-        margin: 20px 0;
-        padding: 20px;
-        background: #111;
-        border-radius: 15px;
-        box-shadow: 0 0 12px rgba(123,47,255,0.4);
-    }
-
-    .question-img {
-        width: 100%;
-        border-radius: 10px;
-        margin-bottom: 10px;
-        display: none;
-    }
-
-    /* ⭐ OPTIONS SINGLE COLUMN ⭐ */
-    .options {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-top: 10px;
-    }
-
-    .opt-btn {
-        padding: 12px;
-        background: #222;
-        border: 2px solid #555;
-        border-radius: 12px;
-        text-align: left;
-        font-size: 17px;
-        cursor: pointer;
-        transition: .3s;
-        position: relative;
-        padding-left: 40px;
-    }
-
-    .opt-btn::before {
-        content: attr(data-op);
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-weight: bold;
-    }
-
-    .selected {
-        border-color: #00c6ff !important;
-        background: #003b4f !important;
-    }
-
-    .selected::after {
-        content: "✓";
-        position: absolute;
-        top: 8px;
-        right: 12px;
-        font-size: 20px;
-        color: #00eaff;
-        font-weight: bold;
-    }
-
-    .correct { border: 3px solid #00ff6a !important; }
-    .wrong { border: 3px solid #ff4d4d !important; }
-
-    .ansBox {
-        margin-top: 10px;
-        padding: 10px;
-        border-radius: 10px;
-        font-size: 17px;
-        font-weight: 600;
-    }
-
-    .ansCorrect { background: #003f1a; color: #00ff77; }
-    .ansWrong { background: #3f0000; color: #ff5757; }
-
-    #submitBtn {
-        display: none;
-        margin: 25px auto;
-        padding: 15px 40px;
-        background: #00c6ff;
-        color: #000;
-        border: none;
-        border-radius: 50px;
-        font-size: 20px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    #timerBox {
-        text-align: center;
-        font-size: 22px;
-        margin-bottom: 15px;
-    }
-
-    #resultBox {
-        text-align: center;
-        margin-top: 25px;
-        font-size: 22px;
-        font-weight: bold;
-        display: none;
-    }
+<style>
+body{
+    margin:0;
+    padding:0;
+    font-family:Poppins,sans-serif;
+    background:#000;
+    color:#fff;
+    display:none;
+}
+#timeModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.92);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+.modal-box{
+    background:#111;
+    padding:25px;
+    width:85%;
+    max-width:350px;
+    border-radius:15px;
+    text-align:center;
+    box-shadow:0 0 18px rgba(123,47,255,.5);
+    animation:zoom .4s ease;
+}
+@keyframes zoom{
+    from{transform:scale(.6);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+.time-input{
+    width:100%;
+    padding:12px;
+    font-size:22px;
+    background:#000;
+    color:#fff;
+    border:2px solid #7b2fff;
+    border-radius:10px;
+    text-align:center;
+}
+.start-btn{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    font-size:20px;
+    font-weight:700;
+    background:#00c6ff;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+.question-box{
+    margin:20px 0;
+    padding:20px;
+    background:#111;
+    border-radius:15px;
+    box-shadow:0 0 12px rgba(123,47,255,.4);
+}
+.options{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+.opt-btn{
+    padding:12px 12px 12px 40px;
+    background:#222;
+    border:2px solid #555;
+    border-radius:12px;
+    cursor:pointer;
+    position:relative;
+}
+.opt-btn::before{
+    content:attr(data-op);
+    position:absolute;
+    left:12px;
+    top:50%;
+    transform:translateY(-50%);
+    font-weight:700;
+}
+.selected{
+    border-color:#00c6ff;
+    background:#003b4f;
+}
+.selected::after{
+    content:"✓";
+    position:absolute;
+    right:12px;
+    top:8px;
+    color:#00eaff;
+    font-size:20px;
+}
+.correct{border:3px solid #00ff6a}
+.wrong{border:3px solid #ff4d4d}
+.ansBox{
+    margin-top:10px;
+    padding:10px;
+    border-radius:10px;
+    font-weight:600;
+}
+.ansCorrect{background:#003f1a;color:#00ff77}
+.ansWrong{background:#3f0000;color:#ff5757}
+#submitBtn{
+    display:none;
+    margin:25px auto;
+    padding:15px 40px;
+    font-size:20px;
+    font-weight:700;
+    background:#00c6ff;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+}
+#timerBox{text-align:center;font-size:22px;margin-bottom:15px}
+#resultBox{text-align:center;font-size:22px;font-weight:700;display:none}
 </style>
 </head>
 
 <body>
 
-<!-- TIMER MODAL -->
 <div id="timeModal">
     <div class="modal-box">
         <h2>⏱ SET YOUR TEST TIME</h2>
@@ -206,207 +149,84 @@
 </div>
 
 <script>
-/* ---------------- JSON: ADD YOUR QUESTIONS HERE ---------------- */
+const questions=[
+{"number":1,"q":"(P + a/V²)(V - b) = RT ...?","A":"બલ્ક મોડ્યુલ્સ","B":"રિજીડીટી મોડ્યુલ્સ","C":"દબનીયતા","D":"ઊર્જા ઘનતા","answer":"C"},
+{"number":2,"q":"કેપીલરી ટ્યૂબ પદ્ધતિ...%?","A":"0.15","B":"1.5","C":"2.4","D":"10","answer":"B"},
+{"number":3,"q":"G,h,c ના પદોમાં સમય?","A":"√(Gh/c³)","B":"√(hc³/G)","C":"√(c³/Gh)","D":"√(Gh/c⁵)","answer":"D"},
+{"number":4,"q":"સાપેક્ષ ત્રુટી...?","A":"12%","B":"8%","C":"25%","D":"32%","answer":"A"},
+{"number":5,"q":"ઘનતામાં મહત્તમ ત્રુટી?","A":"22","B":"0.2","C":"2","D":"0.02","answer":"C"},
+{"number":6,"q":"F = at + bt²...","A":"[MLT⁻⁴]","B":"[MLT⁻³]","C":"[ML²T⁻³]","D":"[ML²T⁻⁴]","answer":"B"},
+{"number":7,"q":"યંગ મોડ્યુલસમાં % ત્રુટી?","A":"0.14","B":"0.9","C":"9","D":"1.4","answer":"D"},
+{"number":8,"q":"v = at + b/(t+c)...","A":"L²","B":"LT²","C":"L","D":"LT⁻²","answer":"D"},
+{"number":9,"q":"ઘનતા ત્રુટી %?","A":"0.14","B":"1.04","C":"1.4","D":"14","answer":"D"}
+];
 
-const questions = [
-    {
-        "number": 1,
-        "q": "(P + a/V²)(V - b) = RT કેટલાક વાયુઓની સ્થિતિનું સમીકરણ રજૂ કરે છે. જ્યાં એ તાપમાન અને a, b, R એ અચળાંકો છે. કઈ ભૌતિક રાશિનું પારિમાણિક સૂત્ર b²/a ના પારિમાણિક સૂત્ર જેવું થાય?",
-        "A": "બલ્ક મોડ્યુલ્સ",
-        "B": "રિજીડીટી મોડ્યુલ્સ",
-        "C": "દબનીયતા",
-        "D": "ઊર્જા ઘનતા",
-        "answer": "C",
-        "image": ""
-    },
-    {
-        "number": 2,
-        "q": "નીચે આપેલા અવલોકન પાણીના પૃષ્ઠતાણ T કેપીલરી ટ્યૂબની રીત દ્વારા મેળવવામાં આવે છે. કેપીલરી ટ્યૂબનો વ્યાસ D = 1.25 × 10⁻² m, પાતળી ટ્યૂબ (નળી)માં પાણીનો વધારો, h = 1.45 × 10⁻² m, g = 9.80 m/s² લો અને T = (rhg/2) × 10³ N/m સંબંધનો ઉપયોગ કરતાં, પૃષ્ઠતાણ માં શક્ય ત્રુટિ કેટલા......% હશે?",
-        "A": "0.15",
-        "B": "1.5",
-        "C": "2.4",
-        "D": "10",
-        "answer": "B",
-        "image": ""
-    },
-    {
-        "number": 3,
-        "q": "G (ગુરુત્વાકર્ષણનો સાર્વત્રિક અચળાંક), h (પ્લાંકનો અચળાંક) અને c (પ્રકાશની ઝડપ) ના પદોમાં સમયની અભિવ્યક્તિ ... ને ચલે છે.",
-        "A": "√(Gh/c³)",
-        "B": "√(hc³/G)",
-        "C": "√(c³/Gh)",
-        "D": "√(Gh/c⁵)",
-        "answer": "D",
-        "image": ""
-    },
-    {
-        "number": 4,
-        "q": "જો આપેલ ભૌતિક રાશિ P ને સંબંધ, મુજબ દર્શાવવામાં આવે તો P માં સાપેક્ષ ત્રુટી ....... થાય. a, b, c અને d ના માપ નમાં સાપેક્ષ ત્રુટીઓ અનુક્રમે 2 %, 1 %, 3 % અને 5 % છે .",
-        "A": "12%",
-        "B": "8%",
-        "C": "25%",
-        "D": "32%",
-        "answer": "A",
-        "image": ""
-    },
-    {
-        "number": 5,
-        "q": "કોઈ એક પદાર્થનું દળ 22.42 g અને કદ 4.7 cc છે. દળ અને કદના માપનમાં અનુક્રમે 0.01 gm અને 0.1 cc જેટલી ત્રુટિ છે. તો ઘનતાના માપનમાં મહત્તમ ત્રુટિ (% માં) કેટલી હશે?",
-        "A": "22",
-        "B": "0.2",
-        "C": "2",
-        "D": "0.02",
-        "answer": "C",
-        "image": ""
-    },
-    {
-        "number": 6,
-        "q": "F = at + bt² દ્વારા એક બળ દર્શાવાય છે જ્યાં t એ સમય છે. a અને b ના પરિમાણો.........છે.",
-        "A": "[MLT⁻⁴], [MLT⁻²]",
-        "B": "[MLT⁻³], [MLT⁻⁴]",
-        "C": "[ML²T⁻³], [ML²T⁻²]",
-        "D": "[ML²T⁻³], [ML²T⁻⁴]",
-        "answer": "B",
-        "image": ""
-    },
-    {
-        "number": 7,
-        "q": "એક 0.2 cm (0.001 cm લઘુત્તમ માપશક્તિ ધરાવતી ફૂટપટ્ટી વડે માપતા) જેટલી ત્રિજ્યા, 1 mm (1 mm લઘુત્તમ માપશક્તિ ધરાવતી મીટર પટ્ટી વડે માપતા) જેટલી લંબાઈ અને 1 kg (1 g લઘુત્તમ માપશક્તિ સાથે) જેટલું દળ ધરાવતા તારનો યંગ મોડ્યુલસ માપવા માટે તેને લટકાવતાં તેમાં 0.5 cm (0.001 cm લઘુત્તમ માપશક્તિ ધરાવતા સ્કેલ) જેટલું ખેંચાણ મેળવવામાં આવે છે. આ પ્રયોગ દ્વારા અપાતા યંગ મોડ્યુલસમાં કેટલી આંશિક ત્રુટિ હશે ? (% માં)",
-        "A": "0.14",
-        "B": "0.9",
-        "C": "9",
-        "D": "1.4",
-        "answer": "D",
-        "image": ""
-    },
-    {
-        "number": 8,
-        "q": "v = at + b/(t + c) સમીકરણ આપ્યું છે. તેમાં v અને t અનુક્રમે વેગ અને સમય દર્શાવે છે. તો a, b, અને c ના પરિમાણ શોધો.",
-        "A": "L², TL², T અને LT²",
-        "B": "LT², LT અને L",
-        "C": "L, LT અને T²",
-        "D": "LT⁻², L અને T",
-        "answer": "D",
-        "image": ""
-    },
-    {
-        "number": 9,
-        "q": "પદાર્થની ઘનતા માપવાના પ્રયોગમાં પદાર્થનું દળ m = (3 ± 0.12)kg અને V = (10 ± 1)m³ નોંધવામાં આવ્યું છે; તો ઘનતા ( = m/v) ના માપનમાં આંશિક ત્રુટિ તથા પ્રતિશત શોધો.",
-        "A": "0.14%",
-        "B": "1.04%",
-        "C": "1.4%",
-        "D": "14%",
-        "answer": "D",
-        "image": ""
-    }
-] -------------------------------------------------------------- */
+let selectedAnswers={},timeLeft=0,timer;
 
-let selectedAnswers = {};
-let timeLeft = 0;
-let timer;
+window.onload=()=>document.body.style.display="block";
 
-window.onload = () => {
-    document.body.style.display = "block";
-};
-
-function startTest() {
-    let mins = document.getElementById("timeInput").value;
-    if (!mins || mins <= 0) {
-        alert("Please enter valid minutes!");
-        return;
-    }
-
-    timeLeft = mins * 60;
-    document.getElementById("timeModal").style.display = "none";
-
+function startTest(){
+    let mins=timeInput.value;
+    if(!mins||mins<=0)return alert("Enter valid time");
+    timeLeft=mins*60;
+    timeModal.style.display="none";
     loadQuestions();
     startTimer();
-    document.getElementById("submitBtn").style.display = "block";
-
+    submitBtn.style.display="block";
     document.documentElement.requestFullscreen();
 }
 
-function loadQuestions() {
-    const quiz = document.getElementById("quizArea");
-    quiz.innerHTML = "";
-
-    questions.forEach((q, i) => {
-
-        let imgTag = q.image ? `<img src="${q.image}" class="question-img" style="display:block">` : "";
-
-        quiz.innerHTML += `
+function loadQuestions(){
+    quizArea.innerHTML="";
+    questions.forEach((q,i)=>{
+        quizArea.innerHTML+=`
         <div class="question-box" id="box${i}">
-            <h2>Q${q.number}. ${q.q}</h2>
-            ${imgTag}
-
-            <div class="options">
-                <div class="opt-btn" onclick="choose(${i}, 'A')" id="btn${i}A" data-op="A">${q.A}</div>
-                <div class="opt-btn" onclick="choose(${i}, 'B')" id="btn${i}B" data-op="B">${q.B}</div>
-                <div class="opt-btn" onclick="choose(${i}, 'C')" id="btn${i}C" data-op="C">${q.C}</div>
-                <div class="opt-btn" onclick="choose(${i}, 'D')" id="btn${i}D" data-op="D">${q.D}</div>
-            </div>
-
-            <div id="ans${i}"></div>
-        </div>`;
+        <h2>Q${q.number}. ${q.q}</h2>
+        <div class="options">
+        <div class="opt-btn" data-op="A" onclick="choose(${i},'A')" id="btn${i}A">${q.A}</div>
+        <div class="opt-btn" data-op="B" onclick="choose(${i},'B')" id="btn${i}B">${q.B}</div>
+        <div class="opt-btn" data-op="C" onclick="choose(${i},'C')" id="btn${i}C">${q.C}</div>
+        <div class="opt-btn" data-op="D" onclick="choose(${i},'D')" id="btn${i}D">${q.D}</div>
+        </div><div id="ans${i}"></div></div>`;
     });
 }
 
-function choose(qIndex, option) {
-    selectedAnswers[qIndex] = option;
-
-    ["A","B","C","D"].forEach(op => {
-        document.getElementById(`btn${qIndex}${op}`).classList.remove("selected");
-    });
-
-    document.getElementById(`btn${qIndex}${option}`).classList.add("selected");
+function choose(i,opt){
+    selectedAnswers[i]=opt;
+    ["A","B","C","D"].forEach(o=>btn(i,o).classList.remove("selected"));
+    btn(i,opt).classList.add("selected");
 }
+function btn(i,o){return document.getElementById(`btn${i}${o}`)}
 
-function startTimer() {
-    timer = setInterval(() => {
-        let m = Math.floor(timeLeft / 60);
-        let s = timeLeft % 60;
-
-        document.getElementById("timer").innerText =
-        `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            submitQuiz();
-        }
-
+function startTimer(){
+    timer=setInterval(()=>{
+        let m=Math.floor(timeLeft/60),s=timeLeft%60;
+        timer.innerText=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+        if(timeLeft<=0){clearInterval(timer);submitQuiz();return;}
         timeLeft--;
-    }, 1000);
+    },1000);
 }
 
-function submitQuiz() {
+function submitQuiz(){
     clearInterval(timer);
-
-    let correct = 0, wrong = 0;
-
-    questions.forEach((q, i) => {
-        let userAns = selectedAnswers[i];
-        let ansDiv = document.getElementById("ans" + i);
-        let box = document.getElementById("box" + i);
-
-        if (userAns === q.answer) {
-            correct++;
-            box.classList.add("correct");
-            ansDiv.innerHTML = `<div class="ansBox ansCorrect">🟢 Correct Answer: ${q.answer}</div>`;
-        } else {
-            wrong++;
-            box.classList.add("wrong");
-            ansDiv.innerHTML = `<div class="ansBox ansWrong">
-                🔴 Your Answer: ${userAns ? userAns : "Not Attempted"} <br>
-                🟢 Correct Answer: ${q.answer}
-            </div>`;
+    submitBtn.disabled=true;
+    let c=0,w=0;
+    questions.forEach((q,i)=>{
+        let ua=selectedAnswers[i];
+        let box=boxId(i),ans=ansId(i);
+        if(ua===q.answer){
+            c++;box.classList.add("correct");
+            ans.innerHTML=`<div class="ansBox ansCorrect">Correct: ${q.answer}</div>`;
+        }else{
+            w++;box.classList.add("wrong");
+            ans.innerHTML=`<div class="ansBox ansWrong">Your: ${ua||"NA"}<br>Correct: ${q.answer}</div>`;
         }
     });
-
-    document.getElementById("resultBox").style.display = "block";
-    document.getElementById("resultBox").innerHTML =
-        `✔ Correct: ${correct} <br> ✖ Wrong: ${wrong}`;
+    resultBox.style.display="block";
+    resultBox.innerHTML=`✔ Correct: ${c}<br>✖ Wrong: ${w}`;
 }
-
+function boxId(i){return document.getElementById("box"+i)}
+function ansId(i){return document.getElementById("ans"+i)}
 </script>
 
 </body>
