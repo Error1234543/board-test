@@ -14,12 +14,11 @@ body{
     font-family:Poppins,sans-serif;
     background:#000;
     color:#fff;
-    display:none;
 }
 #timeModal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.92);
+    background:rgba(0,0,0,.95);
     display:flex;
     align-items:center;
     justify-content:center;
@@ -27,37 +26,22 @@ body{
 }
 .modal-box{
     background:#111;
-    padding:25px;
+    padding:30px;
     width:85%;
-    max-width:350px;
+    max-width:340px;
     border-radius:15px;
     text-align:center;
-    box-shadow:0 0 18px rgba(123,47,255,.5);
-    animation:zoom .4s ease;
-}
-@keyframes zoom{
-    from{transform:scale(.6);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-.time-input{
-    width:100%;
-    padding:12px;
-    font-size:22px;
-    background:#000;
-    color:#fff;
-    border:2px solid #7b2fff;
-    border-radius:10px;
-    text-align:center;
+    box-shadow:0 0 20px rgba(123,47,255,.6);
 }
 .start-btn{
     margin-top:20px;
     width:100%;
-    padding:12px;
-    font-size:20px;
+    padding:14px;
+    font-size:22px;
     font-weight:700;
     background:#00c6ff;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     cursor:pointer;
 }
 .container{
@@ -97,14 +81,6 @@ body{
     border-color:#00c6ff;
     background:#003b4f;
 }
-.selected::after{
-    content:"✓";
-    position:absolute;
-    right:12px;
-    top:8px;
-    color:#00eaff;
-    font-size:20px;
-}
 .correct{border:3px solid #00ff6a}
 .wrong{border:3px solid #ff4d4d}
 .ansBox{
@@ -116,7 +92,6 @@ body{
 .ansCorrect{background:#003f1a;color:#00ff77}
 .ansWrong{background:#3f0000;color:#ff5757}
 #submitBtn{
-    display:none;
     margin:25px auto;
     padding:15px 40px;
     font-size:20px;
@@ -135,14 +110,13 @@ body{
 
 <div id="timeModal">
     <div class="modal-box">
-        <h2>⏱ SET YOUR TEST TIME</h2>
-        <input type="number" id="timeInput" class="time-input" placeholder="Enter minutes">
+        <h2>📝 READY FOR TEST?</h2>
         <button class="start-btn" onclick="startTest()">START TEST</button>
     </div>
 </div>
 
 <div class="container">
-    <div id="timerBox">⏳ Time Left: <span id="timer">00:00</span></div>
+    <div id="timerBox">⏱ Time Taken: <span id="timer">00:00</span></div>
     <div id="quizArea"></div>
     <button id="submitBtn" onclick="submitQuiz()">SUBMIT TEST</button>
     <div id="resultBox"></div>
@@ -152,35 +126,17 @@ body{
 const questions=[
 {"number":1,"q":"(P + a/V²)(V - b) = RT ...?","A":"બલ્ક મોડ્યુલ્સ","B":"રિજીડીટી મોડ્યુલ્સ","C":"દબનીયતા","D":"ઊર્જા ઘનતા","answer":"C"},
 {"number":2,"q":"કેપીલરી ટ્યૂબ પદ્ધતિ...%?","A":"0.15","B":"1.5","C":"2.4","D":"10","answer":"B"},
-{"number":3,"q":"G,h,c ના પદોમાં સમય?","A":"√(Gh/c³)","B":"√(hc³/G)","C":"√(c³/Gh)","D":"√(Gh/c⁵)","answer":"D"},
-{"number":4,"q":"સાપેક્ષ ત્રુટી...?","A":"12%","B":"8%","C":"25%","D":"32%","answer":"A"},
-{"number":5,"q":"ઘનતામાં મહત્તમ ત્રુટી?","A":"22","B":"0.2","C":"2","D":"0.02","answer":"C"},
-{"number":6,"q":"F = at + bt²...","A":"[MLT⁻⁴]","B":"[MLT⁻³]","C":"[ML²T⁻³]","D":"[ML²T⁻⁴]","answer":"B"},
-{"number":7,"q":"યંગ મોડ્યુલસમાં % ત્રુટી?","A":"0.14","B":"0.9","C":"9","D":"1.4","answer":"D"},
-{"number":8,"q":"v = at + b/(t+c)...","A":"L²","B":"LT²","C":"L","D":"LT⁻²","answer":"D"},
-{"number":9,"q":"ઘનતા ત્રુટી %?","A":"0.14","B":"1.04","C":"1.4","D":"14","answer":"D"}
+{"number":3,"q":"G,h,c ના પદોમાં સમય?","A":"√(Gh/c³)","B":"√(hc³/G)","C":"√(c³/Gh)","D":"√(Gh/c⁵)","answer":"D"}
 ];
 
 let selectedAnswers = {};
-let timeLeft = 0;
 let timerInterval;
-let timerEl;
-
-window.onload = () => {
-    document.body.style.display="block";
-    timerEl = document.getElementById("timer");
-};
+let seconds = 0;
 
 function startTest(){
-    let mins = document.getElementById("timeInput").value;
-    if(!mins || mins <= 0) return alert("Enter valid time");
-
-    timeLeft = mins * 60;
     document.getElementById("timeModal").style.display="none";
     loadQuestions();
     startTimer();
-    document.getElementById("submitBtn").style.display="block";
-
     if(document.documentElement.requestFullscreen){
         document.documentElement.requestFullscreen();
     }
@@ -205,48 +161,41 @@ function loadQuestions(){
 
 function choose(i,opt){
     selectedAnswers[i]=opt;
-    ["A","B","C","D"].forEach(o=>btn(i,o).classList.remove("selected"));
-    btn(i,opt).classList.add("selected");
+    ["A","B","C","D"].forEach(o=>document.getElementById(`btn${i}${o}`).classList.remove("selected"));
+    document.getElementById(`btn${i}${opt}`).classList.add("selected");
 }
-function btn(i,o){return document.getElementById(`btn${i}${o}`)}
 
 function startTimer(){
     timerInterval = setInterval(()=>{
-        let m=Math.floor(timeLeft/60);
-        let s=timeLeft%60;
-        timerEl.innerText =
-            `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-        if(timeLeft<=0){
-            clearInterval(timerInterval);
-            submitQuiz();
-        }
-        timeLeft--;
+        seconds++;
+        let m = Math.floor(seconds/60);
+        let s = seconds%60;
+        timer.innerText = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
     },1000);
 }
 
 function submitQuiz(){
     clearInterval(timerInterval);
-    submitBtn.disabled=true;
     let c=0,w=0;
 
     questions.forEach((q,i)=>{
         let ua=selectedAnswers[i];
         let box=document.getElementById("box"+i);
         let ans=document.getElementById("ans"+i);
-
         if(ua===q.answer){
             c++;
             box.classList.add("correct");
-            ans.innerHTML=`<div class="ansBox ansCorrect">Correct: ${q.answer}</div>`;
+            ans.innerHTML=`<div class="ansBox ansCorrect">Correct</div>`;
         }else{
             w++;
             box.classList.add("wrong");
-            ans.innerHTML=`<div class="ansBox ansWrong">Your: ${ua||"NA"}<br>Correct: ${q.answer}</div>`;
+            ans.innerHTML=`<div class="ansBox ansWrong">Your: ${ua||"NA"} | Correct: ${q.answer}</div>`;
         }
     });
 
     resultBox.style.display="block";
-    resultBox.innerHTML=`✔ Correct: ${c}<br>✖ Wrong: ${w}`;
+    resultBox.innerHTML=
+    `✔ Correct: ${c}<br>✖ Wrong: ${w}<br>⏱ Time Taken: ${Math.floor(seconds/60)} min ${seconds%60} sec`;
 }
 </script>
 
