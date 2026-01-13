@@ -29,7 +29,7 @@ body{
     padding:30px;
     border-radius:15px;
     text-align:center;
-    box-shadow:0 0 20px rgba(123,47,255,.6);
+    box-shadow:0 0 20px rgba(0,198,255,.6);
 }
 .start-btn{
     margin-top:20px;
@@ -46,13 +46,17 @@ body{
     margin:auto;
     padding:20px;
 }
-#timerBox{text-align:center;font-size:22px;margin-bottom:15px}
+#timerBox{
+    text-align:center;
+    font-size:22px;
+    margin-bottom:15px;
+}
 .question-box{
     margin:20px 0;
     padding:20px;
     background:#111;
     border-radius:15px;
-    box-shadow:0 0 12px rgba(123,47,255,.4);
+    box-shadow:0 0 12px rgba(0,198,255,.4);
 }
 .options{
     display:flex;
@@ -60,7 +64,7 @@ body{
     gap:12px;
 }
 .opt-btn{
-    padding:12px 12px 12px 40px;
+    padding:12px 12px 12px 45px;
     background:#222;
     border:2px solid #555;
     border-radius:12px;
@@ -70,7 +74,7 @@ body{
 .opt-btn::before{
     content:attr(data-op);
     position:absolute;
-    left:12px;
+    left:15px;
     top:50%;
     transform:translateY(-50%);
     font-weight:700;
@@ -79,16 +83,26 @@ body{
     border-color:#00c6ff;
     background:#003b4f;
 }
-.correct{border:3px solid #00ff6a}
-.wrong{border:3px solid #ff4d4d}
+.correct{
+    border:3px solid #00ff6a;
+}
+.wrong{
+    border:3px solid #ff4d4d;
+}
 .ansBox{
     margin-top:10px;
     padding:10px;
     border-radius:10px;
     font-weight:600;
 }
-.ansCorrect{background:#003f1a;color:#00ff77}
-.ansWrong{background:#3f0000;color:#ff5757}
+.ansCorrect{
+    background:#003f1a;
+    color:#00ff77;
+}
+.ansWrong{
+    background:#3f0000;
+    color:#ff5757;
+}
 #submitBtn{
     margin:30px auto;
     display:block;
@@ -100,7 +114,17 @@ body{
     border-radius:50px;
     cursor:pointer;
 }
-#resultBox{text-align:center;font-size:22px;font-weight:700;display:none}
+#resultBox{
+    text-align:center;
+    font-size:22px;
+    font-weight:700;
+    display:none;
+}
+.question-box img{
+    max-width:100%;
+    border-radius:10px;
+    margin:12px 0;
+}
 </style>
 </head>
 
@@ -122,111 +146,31 @@ body{
 </div>
 
 <script>
-// ✅ QUESTIONS ADDED HERE
+// ================= QUESTIONS JSON =================
 const questions = [
-[
   {
-    "question_number": 1,
-    "question": "(P + a/V²)(V - b) = RT કેટલાક વાયુઓની સ્થિતિનું સમીકરણ રજૂ કરે છે. જ્યાં a તાપમાન અને a, b, R એ અચળાંકો છે. કઈ ભૌતિક રાશિનું પારિમાણિક સૂત્ર b²/a ના પારિમાણિક સૂત્ર જેવું થાય?",
-    "options": {
-      "A": "બલ્ક મોડ્યુલ્સ",
-      "B": "રિજીડીટી મોડ્યુલ્સ",
-      "C": "દબનીયતા (Compressibility)",
-      "D": "ઊર્જા ઘનતા"
-    },
-    "answer": "C"
+    "number": 1,
+    "q": "16 ગ્રામ ઓક્સિજનમાં હાજર પરમાણુઓની સંખ્યા :-",
+    "A": "6.02 × 10^23",
+    "B": "3.01 × 10^23",
+    "C": "3.01 × 10^23.5",
+    "D": "6.02 × 10^23.5",
+    "answer": "A",
+    "image": ""
   },
   {
-    "question_number": 2,
-    "question": "કેપીલરી ટ્યૂબની રીત દ્વારા પૃષ્ઠતાણ T મેળવવામાં આવે છે. D = 1.25 x 10⁻² m, h = 1.45 x 10⁻² m, g = 9.80 m/s² લો અને T = (rhg/2) x 10³ N/m સંબંધનો ઉપયોગ કરતાં, પૃષ્ઠતાણ માં શક્ય ત્રુટી કેટલા % હશે?",
-    "options": {
-      "A": "0.15",
-      "B": "1.5",
-      "C": "2.4",
-      "D": "10"
-    },
-    "answer": "B"
-  },
-  {
-    "question_number": 3,
-    "question": "G (ગુરુત્વાકર્ષણનો સાર્વત્રિક અચળાંક), h (પ્લાન્કનો અચળાંક) અને c (પ્રકાશની ઝડપ) ના પદોમાં સમયની અભિવ્યક્તિ ... ને ચલે છે.",
-    "options": {
-      "A": "√(Gh/c³)",
-      "B": "√(hc³/G)",
-      "C": "√(c³/Gh)",
-      "D": "√(Gh/c⁵)"
-    },
-    "answer": "D"
-  },
-  {
-    "question_number": 4,
-    "question": "જો આપેલ ભૌતિક રાશિ P ને સંબંધ મુજબ દર્શાવવામાં આવે તો P માં સાપેક્ષ ત્રુટી ....... થાય. a, b, c અને d ના માપ માં સાપેક્ષ ત્રુટીઓ અનુક્રમે 2 %, 1 %, 3 % અને 5 % છે.",
-    "options": {
-      "A": "12%",
-      "B": "8%",
-      "C": "25%",
-      "D": "32%"
-    },
-    "answer": "A"
-  },
-  {
-    "question_number": 5,
-    "question": "કોઈ એક પદાર્થનું દળ 22.42 g અને કદ 4.7 cc છે. દળ અને કદના માપનમાં અનુક્રમે 0.01 gm અને 0.1 cc જેટલી ત્રુટી છે. તો ઘનતાના માપનમાં મહત્તમ ત્રુટી (% માં) કેટલી હશે?",
-    "options": {
-      "A": "22",
-      "B": "0.2",
-      "C": "2",
-      "D": "0.02"
-    },
-    "answer": "C"
-  },
-  {
-    "question_number": 6,
-    "question": "F = at + bt² દ્વારા એક બળ દર્શાવાય છે જ્યાં t એ સમય છે. a અને b ના પરિમાણો ......... છે.",
-    "options": {
-      "A": "[MLT⁻⁴], [MLT⁻²]",
-      "B": "[MLT⁻³], [MLT⁻⁴]",
-      "C": "[ML²T⁻³], [ML²T⁻²]",
-      "D": "[ML²T⁻³], [ML²T⁻⁴]"
-    },
-    "answer": "B"
-  },
-  {
-    "question_number": 7,
-    "question": "યંગ મોડ્યુલસ માપવા માટેના પ્રયોગમાં આપેલા ડેટા મુજબ, યંગ મોડ્યુલસમાં કેટલી આંશિક ત્રુટી હશે? (% માં)",
-    "options": {
-      "A": "0.14",
-      "B": "0.9",
-      "C": "9",
-      "D": "1.4"
-    },
-    "answer": "D"
-  },
-  {
-    "question_number": 8,
-    "question": "v = at + b/(t + c) સમીકરણ આપ્યું છે. તેમાં v અને t અનુક્રમે વેગ અને સમય દર્શાવે છે. તો a, b, અને c ના પરિમાણ શોધો.",
-    "options": {
-      "A": "L², TL², T અને LT²",
-      "B": "LT², LT અને L",
-      "C": "L, LT અને T²",
-      "D": "LT⁻², L અને T"
-    },
-    "answer": "D"
-  },
-  {
-    "question_number": 9,
-    "question": "પદાર્થની ઘનતા માપવાના પ્રયોગમાં પદાર્થનું દળ m = (3 ± 0.12)kg અને V = (10 ± 1)m3 નોંધવામાં આવ્યું છે; તો ઘનતા ( = m/v) ના માપનમાં આંશિક ત્રુટી તથા પ્રતિશત શોધો.",
-    "options": {
-      "A": "0.14%",
-      "B": "1.04%",
-      "C": "1.4%",
-      "D": "14%"
-    },
-    "answer": "D"
+    "number": 2,
+    "q": "4.25 ગ્રામ NH3 માં આશરે પરમાણુઓની સંખ્યા :-",
+    "A": "1 × 10^23",
+    "B": "1.5 × 10^23",
+    "C": "2 × 10^23",
+    "D": "6 × 10^23",
+    "answer": "D",
+    "image": ""
   }
-]
+];
 
-
+// ================= LOGIC =================
 let selectedAnswers = {};
 let seconds = 0;
 let timerInterval;
@@ -246,12 +190,16 @@ function loadQuestions(){
         quizArea.innerHTML += `
         <div class="question-box" id="box${i}">
             <h3>Q${q.number}. ${q.q}</h3>
+
+            ${q.image ? `<img src="${q.image}">` : ""}
+
             <div class="options">
                 <div class="opt-btn" data-op="A" onclick="choose(${i},'A')" id="btn${i}A">${q.A}</div>
                 <div class="opt-btn" data-op="B" onclick="choose(${i},'B')" id="btn${i}B">${q.B}</div>
                 <div class="opt-btn" data-op="C" onclick="choose(${i},'C')" id="btn${i}C">${q.C}</div>
                 <div class="opt-btn" data-op="D" onclick="choose(${i},'D')" id="btn${i}D">${q.D}</div>
             </div>
+
             <div id="ans${i}"></div>
         </div>`;
     });
@@ -270,7 +218,8 @@ function startTimer(){
         seconds++;
         let m = Math.floor(seconds/60);
         let s = seconds % 60;
-        timer.innerText = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+        timer.innerText =
+          `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
     },1000);
 }
 
@@ -286,17 +235,23 @@ function submitQuiz(){
         if(ua === q.answer){
             correct++;
             box.classList.add("correct");
-            ans.innerHTML = `<div class="ansBox ansCorrect">Correct</div>`;
+            ans.innerHTML =
+              `<div class="ansBox ansCorrect">✔ Correct</div>`;
         }else{
             wrong++;
             box.classList.add("wrong");
-            ans.innerHTML = `<div class="ansBox ansWrong">Your: ${ua||"NA"} | Correct: ${q.answer}</div>`;
+            ans.innerHTML =
+              `<div class="ansBox ansWrong">
+                Your: ${ua || "NA"} | Correct: ${q.answer}
+               </div>`;
         }
     });
 
     resultBox.style.display="block";
     resultBox.innerHTML =
-        `✔ Correct: ${correct}<br>✖ Wrong: ${wrong}<br>⏱ Time Taken: ${Math.floor(seconds/60)} min ${seconds%60} sec`;
+      `✔ Correct: ${correct}<br>
+       ✖ Wrong: ${wrong}<br>
+       ⏱ Time Taken: ${Math.floor(seconds/60)} min ${seconds%60} sec`;
 }
 </script>
 
