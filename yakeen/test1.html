@@ -30,7 +30,6 @@ body{
     border-radius:20px;
     text-align:center;
     box-shadow:0 0 25px rgba(0,198,255,.6);
-    border: 1px solid #333;
 }
 .start-btn{
     margin-top:20px;
@@ -42,11 +41,6 @@ body{
     border:none;
     border-radius:50px;
     cursor:pointer;
-    transition: 0.3s;
-}
-.start-btn:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00c6ff;
 }
 .container{
     max-width:850px;
@@ -57,27 +51,34 @@ body{
     text-align:center;
     font-size:22px;
     margin-bottom:20px;
-    background: #111;
-    padding: 10px;
-    border-radius: 10px;
-    position: sticky;
-    top: 10px;
-    z-index: 100;
-    border: 1px solid #00c6ff;
+    background:#111;
+    padding:10px;
+    border-radius:10px;
+    position:sticky;
+    top:10px;
+    border:1px solid #00c6ff;
 }
 .question-box{
     margin:25px 0;
     padding:25px;
     background:#111;
     border-radius:15px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.5);
-    border-left: 5px solid #00c6ff;
+    border-left:5px solid #00c6ff;
+}
+.question-img{
+    margin:15px 0;
+    text-align:center;
+}
+.question-img img{
+    max-width:100%;
+    border-radius:10px;
+    border:1px solid #333;
 }
 .options{
     display:flex;
     flex-direction:column;
     gap:12px;
-    margin-top: 15px;
+    margin-top:15px;
 }
 .opt-btn{
     padding:15px 15px 15px 50px;
@@ -86,10 +87,6 @@ body{
     border-radius:12px;
     cursor:pointer;
     position:relative;
-    transition: 0.2s;
-}
-.opt-btn:hover{
-    background: #222;
 }
 .opt-btn::before{
     content:attr(data-op);
@@ -98,28 +95,19 @@ body{
     top:50%;
     transform:translateY(-50%);
     font-weight:700;
-    color: #00c6ff;
+    color:#00c6ff;
 }
-.selected{
-    border-color:#00c6ff;
-    background:#003b4f !important;
-}
-.correct-box{
-    border-color:#00ff6a !important;
-    background: #00220e !important;
-}
-.wrong-box{
-    border-color:#ff4d4d !important;
-    background: #220000 !important;
-}
+.selected{background:#003b4f;border-color:#00c6ff;}
+.correct-box{background:#00220e;border-color:#00ff6a;}
+.wrong-box{background:#220000;border-color:#ff4d4d;}
+
 .ansBox{
     margin-top:15px;
     padding:12px;
     border-radius:10px;
-    font-weight:600;
 }
-.ansCorrect{ background:#003f1a; color:#00ff77; }
-.ansWrong{ background:#3f0000; color:#ff5757; }
+.ansCorrect{background:#003f1a;color:#00ff77;}
+.ansWrong{background:#3f0000;color:#ff5757;}
 
 #submitBtn{
     margin:40px auto;
@@ -128,20 +116,18 @@ body{
     font-size:22px;
     font-weight:700;
     background: linear-gradient(45deg, #00c6ff, #0072ff);
-    color: white;
+    color:white;
     border:none;
     border-radius:50px;
-    cursor:pointer;
 }
 #resultBox{
     text-align:center;
     font-size:24px;
-    font-weight:700;
     display:none;
-    padding: 30px;
-    background: #111;
-    border-radius: 20px;
-    border: 2px solid #00c6ff;
+    padding:30px;
+    background:#111;
+    border-radius:20px;
+    border:2px solid #00c6ff;
 }
 </style>
 </head>
@@ -151,7 +137,7 @@ body{
 <div id="startScreen">
     <div class="start-box">
         <h1 style="color:#00c6ff">Yakeen NEET 2026</h1>
-        <p>Physics Test 01 (Gujarati Medium)</p>
+        <p>Physics Test (Gujarati)</p>
         <button class="start-btn" onclick="startTest()">START TEST</button>
     </div>
 </div>
@@ -164,382 +150,7 @@ body{
 </div>
 
 <script>
-// ================= CORRECTED QUESTIONS JSON =================
 const questions = [
-  {
-    "number": 1,
-    "q": "(P + a/V²)(V - b) = RT કેટલાક વાયુઓની સ્થિતિનું સમીકરણ રજૂ કરે છે. જ્યાં a તાપમાન અને a, b, R એ અચળાંકો છે. કઈ ભૌતિક રાશિનું પારિમાણિક સૂત્ર b²/a ના પારિમાણિક સૂત્ર જેવું થાય?",
-    "A": "બલ્ક મોડ્યુલ્સ",
-    "B": "રિજીડીટી મોડ્યુલ્સ",
-    "C": "દબનીયતા (Compressibility)",
-    "D": "ઊર્જા ઘનતા",
-    "answer": "C"
-  },
-  {
-    "number": 2,
-    "q": "કેપીલરી ટ્યૂબની રીત દ્વારા પૃષ્ઠતાણ T મેળવવામાં આવે છે. D = 1.25 x 10⁻² m, h = 1.45 x 10⁻² m, g = 9.80 m/s² લો અને T = (rhg/2) x 10³ N/m સંબંધનો ઉપયોગ કરતાં, પૃષ્ઠતાણ માં શક્ય ત્રુટી કેટલા % હશે?",
-    "A": "0.15",
-    "B": "1.5",
-    "C": "2.4",
-    "D": "10",
-    "answer": "B"
-  },
-  {
-    "number": 3,
-    "q": "G (ગુરુત્વાકર્ષણનો સાર્વત્રિક અચળાંક), h (પ્લાન્કનો અચળાંક) અને c (પ્રકાશની ઝડપ) ના પદોમાં સમયની અભિવ્યક્તિ ... ને ચલે છે.",
-    "A": "√(Gh/c³)",
-    "B": "√(hc³/G)",
-    "C": "√(c³/Gh)",
-    "D": "√(Gh/c⁵)",
-    "answer": "D"
-  },
-  {
-    "number": 4,
-    "q": "જો આપેલ ભૌતિક રાશિ P ને સંબંધ મુજબ દર્શાવવામાં આવે તો P માં સાપેક્ષ ત્રુટી ....... થાય. a, b, c અને d ના માપ માં સાપેક્ષ ત્રુટીઓ અનુક્રમે 2 %, 1 %, 3 % અને 5 % છે.",
-    "A": "12%",
-    "B": "8%",
-    "C": "25%",
-    "D": "32%",
-    "answer": "A"
-  },
-  {
-    "number": 5,
-    "q": "કોઈ એક પદાર્થનું દળ 22.42 g અને કદ 4.7 cc છે. દળ અને કદના માપનમાં અનુક્રમે 0.01 gm અને 0.1 cc જેટલી ત્રુટી છે. તો ઘનતાના માપનમાં મહત્તમ ત્રુટી (% માં) કેટલી હશે?",
-    "A": "22",
-    "B": "0.2",
-    "C": "2",
-    "D": "0.02",
-    "answer": "C"
-  },
-  {
-    "number": 6,
-    "q": "F = at + bt² દ્વારા એક બળ દર્શાવાય છે જ્યાં t એ સમય છે. a અને b ના પરિમાણો ......... છે.",
-    "A": "[MLT⁻⁴], [MLT⁻²]",
-    "B": "[MLT⁻³], [MLT⁻⁴]",
-    "C": "[ML²T⁻³], [ML²T⁻²]",
-    "D": "[ML²T⁻³], [ML²T⁻⁴]",
-    "answer": "B"
-  },
-  {
-    "number": 7,
-    "q": "યંગ મોડ્યુલસ માપવા માટેના પ્રયોગમાં આપેલા ડેટા મુજબ, યંગ મોડ્યુલસમાં કેટલી આંશિક ત્રુટી હશે? (% માં)",
-    "A": "0.14",
-    "B": "0.9",
-    "C": "9",
-    "D": "1.4",
-    "answer": "D"
-  },
-  {
-    "number": 8,
-    "q": "v = at + b/(t + c) સમીકરણ આપ્યું છે. તેમાં v અને t અનુક્રમે વેગ અને સમય દર્શાવે છે. તો a, b, અને c ના પરિમાણ શોધો.",
-    "A": "L², TL², T અને LT²",
-    "B": "LT², LT અને L",
-    "C": "L, LT અને T²",
-    "D": "LT⁻², L અને T",
-    "answer": "D"
-  },
-  {
-    "number": 9,
-    "q": "પદાર્થની ઘનતા માપવાના પ્રયોગમાં પદાર્થનું દળ m = (3 ± 0.12)kg અને V = (10 ± 1)m3 નોંધવામાં આવ્યું છે; તો ઘનતા ( = m/v) ના માપનમાં આંશિક ત્રુટી તથા પ્રતિશત શોધો.",
-    "A": "0.14%",
-    "B": "1.04%",
-    "C": "1.4%",
-    "D": "14%",
-    "answer": "D"
-  },
-{
-
-    "number": 10,
-    "q": "નળાકારની લંબાઈ મીટર પટ્ટીથી માપવામાં આવે છે કે જેની લઘુત્તમ માપ શક્તિ 0.1 cm છે. તેનો વ્યાસ વર્નિયર કેલિપર્સથી માપવામાં આવે છે, જેની લઘુત્તમ માપ શક્તિ 0.01 cm છે. જો લંબાઈ 5.0 cm અને ત્રિજ્યા 2.00 cm હોય તો કદના માપનમાં પ્રતિશત ત્રુટિ.",
-    "A": "1%",
-    "B": "2%",
-    "C": "3%",
-    "D": "4%",
-    "answer": "C"
-  },
-  {
-    "number": 11,
-    "q": "જ્યારે સ્ક્રૂગેજ સંપૂર્ણ બંધ હોય ત્યારે વર્તુળાકાર સ્કેલનો પાંચમો કાંપો સંદર્ભ રેખા સાથે બંધ બેસે છે. વર્તુળાકાર સ્કેલ પર 50 કાંપા છે અને એક પરિભ્રમણમાં મુખ્ય સ્કેલ 0.5 mm જેટલી ખસે છે. કોઈ એક અવલોકન માટે મુખ્ય સ્કેલ 5 mm અને વર્તુળાકાર સ્કેલનો 20 મો કાંપો સંદર્ભ રેખા સાથે બંધ બેસે છે. સાચું અવલોકન (mm માં) કેટલું હશે ?",
-    "A": "5.00",
-    "B": "5.25",
-    "C": "5.15",
-    "D": "5.20",
-    "answer": "C"
-  },
-  {
-    "number": 12,
-    "q": "વર્નિયર કેલિપર્સના મુખ્ય સ્કેલનો N કાપો ગૌણ સ્કેલના (N + 1) માં કાપા સાથે એકરૂપ થાય છે. જો મુખ્ય સ્કેલના દરેક કાપા a એકમ હોય, તો સાધનની લઘુત્તમ માપ શક્તિ કેટલી થાય ?",
-    "A": "a",
-    "B": "a/N",
-    "C": "N/(N+1) * a",
-    "D": "a/(N+1)",
-    "answer": "D"
-  },
-  {
-    "number": 13,
-    "q": "એક ઘનની ઘનતાના માપનમાં તેનું દ્રવ્યમાન અને ધારની લંબાઈ અનુક્રમે (10.00 ± 0.10) kg અને (0.10 ± 0.01) m માપવામાં આવે છે. આ ઘનતા માપનમાં ત્રુટિ ..... છે.",
-    "A": "0.01 kg/m³",
-    "B": "0.10 kg/m³",
-    "C": "0.013 kg/m³",
-    "D": "આમાંથી એક પણ નહિં.",
-    "answer": "D"
-  },
-  {
-    "number": 14,
-    "q": "વર્નિયર કેલિપર્સની મુખ્ય સ્કેલની લઘુત્તમ માપશક્તિ 1 mm છે. વર્નિયર સ્કેલનો 10 મો કાપો મુખ્ય સ્કેલના 9 માં કાપા સાથે બંધ બેસે છે. જ્યારે વર્નિયર કેલિપર્સ સંપૂર્ણ બંધ હોય ત્યારે વર્નિયર કેલિપર્સનો 7 મો કાંપો મુખ્ય સ્કેલના શૂન્ય સાથે બંધ બેસે છે અને વર્નિયર સ્કેલનો શૂન્ય કાંપો મુખ્ય સ્કેલના શૂન્ય કાંપાની જમણી બાજુ છે. જ્યારે વર્નિયર સ્કેલનો ઉપયોગ નળાકારની લંબાઈ માપવામાં થાય ત્યારે વર્નિયર સ્કેલનો શૂન્ય કાંપો 3.1 cm અને 3.2 cm વચ્ચે અને તેનો ચોથો VSD મુખ્ય સ્કેલ સાથે બંધ બેસે છે. તો નળાકારની લંબાઈ કેટલા cm હશે ? (VSD વર્નિયર સ્કેલ વિભાગ)",
-    "A": "3.21",
-    "B": "2.99",
-    "C": "3.2",
-    "D": "3.07",
-    "answer": "D"
-  },
-  {
-    "number": 15,
-    "q": "જો બળ F ને, F = Pt⁻¹ + Qt સમીકરણ વડે રજૂ કરી શકાતું હોય, તો P નો એકમ ..........ના જેવો છે, જ્યાં t સમય છે.",
-    "A": "પ્રવેગ",
-    "B": "વેગ",
-    "C": "સ્થાનાંતર",
-    "D": "વેગમાન",
-    "answer": "D"
-  },
-  {
-    "number": 16,
-    "q": "ધાતુનો તાર (0.4 + 0.002) ગ્રામ દળ, (0.3 + 0.001) mm ત્રિજ્યા અને (5 + 0.02) cm લંબાઈ ધરાવે છે. તેની ઘનતાના માપનમાં નિકટતમ મહત્તમ પ્રતિશત ત્રુટિ ........... હશે.",
-    "A": "1.4%",
-    "B": "1.2%",
-    "C": "1.3%",
-    "D": "1.6%",
-    "answer": "D"
-  },
-  {
-    "number": 17,
-    "q": "જો બળ (F), લંબાઈ (L) અને સમય (T) મૂળભૂત રાશિઓ હોય તો, દળનો એકમ શોધો.",
-    "A": "[F L T-2]",
-    "B": "[F L-2 T-1]",
-    "C": "[F L-1 T2]",
-    "D": "[F2 L T-2]",
-    "answer": "C"
-  },
-  {
-    "number": 18,
-    "q": "એક વિદ્યાર્થી વર્તુળાકાર આડછેદવાળી પેન્સિલનો વ્યાસ વર્નિયર કેલિપર્સ વડે માપી ચાર અવલોકન 5.50 mm, 5.55 mm, 5.45 mm, 5.65 mm નોંધે છે. આ ચાર અવલોકનનું સરેરાશ 5.5375 mm અને આંકડાનું વિચલન 0.07395 mm છે. પેન્સિલનો સરેરાશ વ્યાસ કેટલો નોંધવો જોઈએ?",
-    "A": "(5.5375 ± 0.0739) mm",
-    "B": "(5.538 ± 0.074) mm",
-    "C": "(5.54 ± 0.07) mm",
-    "D": "(5.5375 ± 0.0740) mm",
-    "answer": "C"
-  },
-  {
-    "number": 19,
-    "q": "પદાર્થની સાપેક્ષ ઘનતા શોધવા માટે તેનું વજન પહેલા હવામાં ને પછી પાણીમાં કરવા આવે છે. જો હવામાં તેનું વજન (5.00 ± 0.05) ન્યુટન અને પાણીમાં તેનું વજન (4.00 ± 0.05) ન્યુટન મળતું હોય તો તેની સાપેક્ષ ઘનતા મહત્તમ પ્રતિશત ત્રુટિ સાથે શોધો.",
-    "A": "5.0 ± 11%",
-    "B": "5.0 ± 1%",
-    "C": "5.0 ± 6%",
-    "D": "1.25 ± 5%",
-    "answer": "A"
-  },
-  {
-    "number": 20,
-    "q": "નીચેનામાંથી કઈ રાશિઓનું પરિમાણ એ ગુરુત્વાકર્ષણ અચળાંકના પરિમાણને સમાન છે.",
-    "A": "(વેગ)²/એકમ લંબાઈ દીઠ દળ",
-    "B": "બળ/દળ",
-    "C": "(વેગમાન)²/બળ",
-    "D": "કાર્ય/સમાન",
-    "answer": "A"
-  },
-  {
-    "number": 21,
-    "q": "18.425 cm, 7.21 cm અને 5.0 cm માપનોનો સરવાળો સાર્થક અંકમાં..........છે.",
-    "A": "30.635 cm",
-    "B": "30.64 cm",
-    "C": "30.6 cm",
-    "D": "31 cm",
-    "answer": "C"
-  },
-{
-
-    "number": 22,
-    "q": "સાદા લોલક વડે g ના માપનના પ્રયોગમાં સમયગાળો 0.2% ની સચોટતા સાથે માપવામાં આવે છે. જ્યારે લંબાઈ 0.5% ની સચોટતા સાથે માપવામાં આવે છે તો આ રીતે મળેલા g ના માપનમાં પ્રતિશત સચોટતા ?",
-    "A": "0.7%",
-    "B": "0.1%",
-    "C": "0.25%",
-    "D": "0.9%",
-    "answer": "D"
-  },
-  {
-    "number": 23,
-    "q": "1 પાર્સેક (Pc) = ........... .",
-    "A": "3.88 × 10¹⁶ m",
-    "B": "3.08 × 10¹⁶ m",
-    "C": "30.8 × 10¹⁶ m",
-    "D": "38.8 × 10¹⁶ m",
-    "answer": "B"
-  },
-  {
-    "number": 24,
-    "q": "કોઈ સ્ક્રૂ ગેજ માં સ્ક્રૂ ના 5 પૂર્ણ ભ્રમણ તેને 0.25 cm જેટલું રેખીય સ્થાનાંતર કરાવે છે. તેમાં વર્તુળાકાર સ્કેલ પર 100 કાપા છે. તારની જાડાઈ માપતા મુખ્ય કાપા પરનું અવલોકન 4 અને વર્તુળાકાર સ્કેલ પર 30 કાપા દર્શાવે છે. માપનની શૂન્ય ત્રુટિને અવગણતા તારની જાડાઈ કેટલી થાય?",
-    "A": "0.0430 cm",
-    "B": "0.3150 cm",
-    "C": "0.4300 cm",
-    "D": "0.2150 cm",
-    "answer": "D"
-  },
-  {
-    "number": 25,
-    "q": "આપેલ એક સ્ક્રૂગેજમાં વર્તુળાકાર સ્કેલ પર પિચ અને કાપાઓની સંખ્યા અનુક્રમે 0.5 mm અને 100 છે. જ્યારે આ સ્ક્રૂગેજ પૂર્ણત: કોઈપણ પદાર્થ વગર બંધ છે, ત્યારે વર્તુળાકાર માપપટ્ટીનું શૂન્ય સરેરાશ રેખાની 3 કાપા નીચે છે. એક પાતળી તક્તિ માટે મુખ્ય માપપટ્ટી અને વર્તુળાકાર માપપટ્ટીના વાંચનો અનુક્રમે 5.5 mm અને 48 છે. આ તક્તિની જાડાઈ....હશે.",
-    "A": "5.755 mm",
-    "B": "5.725 mm",
-    "C": "5.740 mm",
-    "D": "5.950 mm",
-    "answer": "B"
-  },
-  {
-    "number": 26,
-    "q": "વર્નિયર કેલિપર્સની મુખ્ય માપપટ્ટીના એક વિભાગનું મૂલ્ય 1 mm ને બરાબર છે. જો વર્નિયર સ્કેલના 20 વિભાગો એ મુખ્ય માપપટ્ટીના 16 વિભાગ સાથે બંધ બેસતાં આવે છે. તો વર્નિયર કેલિપર્સની લઘુત્તમ માપશક્તિ કેટલી હશે?",
-    "A": "0.02 mm",
-    "B": "0.2 mm",
-    "C": "0.8 mm",
-    "D": "0.08 mm",
-    "answer": "B"
-  },
-  {
-    "number": 27,
-    "q": "સ્ક્રૂગેજના વર્તુળાકાર સ્કેલના બે પૂર્ણ આંટા દ્વારા મુખ્ય સ્કેલ પર 1 mm નું અંતર નક્કી થાય છે. વર્તુળાકાર સ્કેલ પર કુલ કાપા છે. તેની સાથે એવું જોવા મળ્યું છે કે સ્ક્રૂગેજની શૂન્ય ત્રુટિ -0.03 mm છે. જ્યારે એક પાતળા તારનો વ્યાસ માપવાના પ્રયોગમાં વિદ્યાર્થી મુખ્ય સ્કેલ પર 3 mm વાંચન કરે છે. મુખ્ય સ્કેલને અનુરૂપ વર્તુળાકાર સ્કેલના કાપાઓની સંખ્યા 35 છે. તારનો વ્યાસ (mm માં) કેટલો હશે ?",
-    "A": "3.38",
-    "B": "3.32",
-    "C": "3.73",
-    "D": "3.67",
-    "answer": "D"
-  },
-  {
-    "number": 28,
-    "q": "વર્નિયર કેલિપર્સમાં, વર્નિયરના 10 કાપા મુખ્ય સ્કેલના 9 કાપા બરાબર થાય છે. જ્યારે વર્નિયર કેલિપર્સના બંને જડબા એકબીજાને સ્પર્શે છે ત્યારે વર્નિયર પરનો શૂન્યમો કાપો મુખ્ય સ્કેલના શૂન્યમાં કાપાની ડાબી બાજુ ખસે છે અને વર્નિયર પરનો ચોથો કાપો મુખ્ય સ્કેલના અવલોકન સાથે બંધ બેસે છે. મુખ્ય સ્કેલના એક કાપો 1 mm નો છે. ગોલિય પદાર્થનો વ્યાસ માપતી વખતે વસ્તુને બે જડબાની વચ્ચે પકડવામાં આવે છે. હવે એવું જોવા મળે છે કે બે વર્નિયરનો શૂન્ય કાપો મુખ્ય સ્કેલના 30 માં અને 31 માં કાપાની વચ્ચે આવે છે અને વર્નિયરનો 6th (છઠ્ઠો) કાપો મુખ્ય સ્કેલના અવલોકન સાથે બરાબર બંધબેસતો આવે છે. ગોળાકાર વસ્તુનો વ્યાસ __________ cm થશે.",
-    "A": "3.02",
-    "B": "3.06",
-    "C": "3.10",
-    "D": "3.20",
-    "answer": "B"
-  },
-  {
-    "number": 29,
-    "q": "d/dx ((x²-1)/(x+1)) = ___________",
-    "A": "0",
-    "B": "1",
-    "C": "3x²+2x-1 / (x+1)²",
-    "D": "x²+2x-1 / (x+1)²",
-    "answer": "B"
-  },
-  {
-    "number": 30,
-    "q": "y = x + x² + 1/x + 1/x³ , તો dy/dx શોધો.",
-    "A": "1 + x - 1/x⁴ - 1/x²",
-    "B": "1 + 2x + 1/x² + 1/x⁴",
-    "C": "1 + 2x - 1/x² - 1/x⁴",
-    "D": "1 + 2x - 1/x² - 3/x⁴",
-    "answer": "D"
-  },
-  {
-    "number": 31,
-    "q": "જો y = x² sin x, તો dy/dx = ___________",
-    "A": "x²cos x + 2x sin x",
-    "B": "2x sin x",
-    "C": "x²cos x",
-    "D": "2x cos x",
-    "answer": "A"
-  },
-  {
-    "number": 32,
-    "q": "sin(8π + θ) શું થશે ?",
-    "A": "- sin θ",
-    "B": "sin θ",
-    "C": "cos θ",
-    "D": "- cos θ",
-    "answer": "B"
-  },
-{
-
-
-    "number": 33,
-    "q": "જો cos θ = 4/5 અને sin θ ધન તો cot θ શોધો.",
-    "A": "3/4",
-    "B": "4/3",
-    "C": "−4/3",
-    "D": "4/5",
-    "answer": "B"
-  },
-  {
-    "number": 34,
-    "q": "જો y = log_e(ax + b) તો dy/dx = ___________ (a અને b અચળ છે.)",
-    "A": "(a+b)/(ax+b)",
-    "B": "a/(ax+b)",
-    "C": "b/(ax+b)",
-    "D": "(ax + b)a",
-    "answer": "B"
-  },
-  {
-    "number": 35,
-    "q": "સુરેખ ગતિ કરતા પદાર્થ માટે વેગ-સમયનો આલેખ આકૃતિમાં દર્શાવેલ છે. તો 0 થી 10s ના સમય દરમિયાન સ્થાનાંતર અને પદાર્થે કાપેલ અંતરનો ગુણોત્તર.....હોય.",
-    "A": "1 : 1",
-    "B": "1 : 4",
-    "C": "1 : 2",
-    "D": "1 : 3",
-    "answer": "C"
-  },
-  {
-    "number": 36,
-    "q": "આકૃતિમાં બતાવ્યા અનુસાર એક વ્યક્તિ વર્તુળાકાર માર્ગ પર A થી B સુધી જાય છે. જો તે 60 m અંતર કાપે, તો સ્થાનાંતરનું મૂલ્ય......... (cos 135° = -0.7 છે.)",
-    "A": "42 m",
-    "B": "47 m",
-    "C": "19 m",
-    "D": "40 m",
-    "answer": "A"
-  },
-  {
-    "number": 37,
-    "q": "અચળ પ્રવેગથી ગતિ કરતાં પદાર્થનો v − t ના આલેખનો ઢાળ શું આવે ?",
-    "A": "D",
-    "B": "F",
-    "C": "C",
-    "D": "E",
-    "answer": "D"
-  },
-  {
-    "number": 38,
-    "q": "x વિરુદ્ધ t નો આલેખ આકૃતિમાં દર્શાવેલ છે, તેના સંદર્ભમાં નીચેનામાંથી યોગ્ય વિકલ્પો પસંદ કરો :",
-    "A": "t = 0 સમયે કણને સ્થિર સ્થિતિમાંથી મુક્ત કરવામાં આવે છે.",
-    "B": "B બિંદુએ પ્રવેગ a > 0 છે.",
-    "C": "C બિંદુએ વેગ અને પ્રવેગ શૂન્ય થાય છે.",
-    "D": "D બિંદુ એ ઝડપ E થી વધુ છે.",
-    "answer": "D"
-  },
-  {
-    "number": 39,
-    "q": "1 m ત્રિજ્યાનું એક વ્હીલ સમક્ષિતિજ રસ્તા પર અડધું ચક્ર ફરે છે. તો જમીન સાથે શરૂઆતમાં સંપર્કમાં રહેલા બિંદુના સ્થાનાંતરનું મૂલ્ય ............ ",
-    "A": "2π",
-    "B": "π",
-    "C": "√(π² + 4)",
-    "D": "2",
-    "answer": "C"
-  },
-  {
-    "number": 40,
-    "q": "કણ એક સીધી રેખામાં એવી રીતે આગળ વધી રહ્યું છે કે તેના સ્થાનાંતરનું સમીકરણ s = t³ − 6t² + 3t + 4 મીટર છે. જ્યારે પદાર્થનો પ્રવેગ શૂન્ય હશે ત્યારે તેનો વેગ (ms⁻¹ માં) કેટલો હશે?",
-    "A": "3",
-    "B": "-12",
-    "C": "42",
-    "D": "-9",
-    "answer": "D"
-  },
-  {
-    "number": 41,
-    "q": "એક કણનો વેગ v = At + Bt² છે, જ્યાં A અને B અચળાંકો છે, તો આ કણે 1 સેકન્ડથી 2 સેકન્ડના ગાળામાં કાપેલું અંતર કેટલું હશે ?",
-    "A": "3A + 7B",
-    "B": "3/2 A + 7/3 B",
-    "C": "A/2 + B/2",
-    "D": "3/2 A + 4B",
-    "answer": "B"
-  }
-]
 
 
 let selectedAnswers = {};
@@ -555,10 +166,11 @@ function startTest(){
 function loadQuestions(){
     const quizArea = document.getElementById("quizArea");
     quizArea.innerHTML="";
-    questions.forEach((q, i)=>{
+    questions.forEach((q,i)=>{
         quizArea.innerHTML += `
         <div class="question-box" id="box${i}">
-            <h3 style="margin-top:0">Q${q.number}. ${q.q}</h3>
+            <h3>Q${q.number}. ${q.q}</h3>
+            ${q.image ? `<div class="question-img"><img src="${q.image}"></div>` : ""}
             <div class="options">
                 <div class="opt-btn" data-op="A" onclick="choose(${i},'A')" id="btn${i}A">${q.A}</div>
                 <div class="opt-btn" data-op="B" onclick="choose(${i},'B')" id="btn${i}B">${q.B}</div>
@@ -570,58 +182,48 @@ function loadQuestions(){
     });
 }
 
-function choose(i, opt){
-    selectedAnswers[i] = opt;
-    ["A","B","C","D"].forEach(o => {
+function choose(i,opt){
+    selectedAnswers[i]=opt;
+    ["A","B","C","D"].forEach(o=>{
         document.getElementById(`btn${i}${o}`).classList.remove("selected");
     });
     document.getElementById(`btn${i}${opt}`).classList.add("selected");
 }
 
 function startTimer(){
-    timerInterval = setInterval(()=>{
+    timerInterval=setInterval(()=>{
         seconds++;
-        let m = Math.floor(seconds/60);
-        let s = seconds % 60;
-        document.getElementById("timer").innerText = 
-          `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-    }, 1000);
+        document.getElementById("timer").innerText =
+        `${String(Math.floor(seconds/60)).padStart(2,"0")}:${String(seconds%60).padStart(2,"0")}`;
+    },1000);
 }
 
 function submitQuiz(){
     clearInterval(timerInterval);
-    let correct = 0, wrong = 0;
+    let correct=0, wrong=0;
 
-    questions.forEach((q, i)=>{
-        let ua = selectedAnswers[i];
-        let box = document.getElementById("box" + i);
-        let ansDiv = document.getElementById("ans" + i);
+    questions.forEach((q,i)=>{
+        let ua=selectedAnswers[i];
+        let box=document.getElementById("box"+i);
+        let ans=document.getElementById("ans"+i);
 
-        if(ua === q.answer){
+        if(ua===q.answer){
             correct++;
             box.classList.add("correct-box");
-            ansDiv.innerHTML = `<div class="ansBox ansCorrect">✔ સાચો જવાબ!</div>`;
-        } else {
+            ans.innerHTML=`<div class="ansBox ansCorrect">✔ સાચો જવાબ</div>`;
+        }else{
             wrong++;
             box.classList.add("wrong-box");
-            ansDiv.innerHTML = `
-                <div class="ansBox ansWrong">
-                    ❌ ખોટો જવાબ! <br>
-                    તમારો જવાબ: ${ua || "આપ્યો નથી"} | સાચો જવાબ: ${q.answer}
-                </div>`;
+            ans.innerHTML=`<div class="ansBox ansWrong">❌ ખોટો જવાબ<br>સાચો જવાબ: ${q.answer}</div>`;
         }
     });
 
-    const resultBox = document.getElementById("resultBox");
-    resultBox.style.display = "block";
-    resultBox.innerHTML = `
-        <h2 style="color:#00c6ff">Result Summary</h2>
-        <p>✅ સાચા: ${correct}</p>
-        <p>❌ ખોટા: ${wrong}</p>
-        <p>⏱ સમય: ${Math.floor(seconds/60)} min ${seconds%60} sec</p>
-        <button class="start-btn" onclick="location.reload()">RETAKE TEST</button>
-    `;
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    resultBox.style.display="block";
+    resultBox.innerHTML=`
+    <h2 style="color:#00c6ff">Result</h2>
+    <p>✅ સાચા: ${correct}</p>
+    <p>❌ ખોટા: ${wrong}</p>
+    <p>⏱ સમય: ${seconds}s</p>`;
 }
 </script>
 
