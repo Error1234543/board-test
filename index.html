@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,247 +8,138 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    background: radial-gradient(circle, #00111f, #00070f);
-    color: white;
-    text-align: center;
-  }
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:radial-gradient(circle,#00111f,#00070f);
+  color:#fff;
+  text-align:center;
+}
+.top-buttons{
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  padding:1rem;
+}
+.top-btn{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:#0088cc;
+  padding:.6rem 1.2rem;
+  border-radius:50px;
+  color:#fff;
+  font-weight:600;
+  text-decoration:none;
+  box-shadow:0 0 15px rgba(0,174,255,.5);
+}
+.top-btn img{width:22px}
+h3{text-shadow:0 0 15px #00bfff}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:1rem;
+  padding:20px;
+}
+.card{
+  background:linear-gradient(145deg,#00182e,#002b55);
+  border:2px solid #00eaff;
+  border-radius:15px;
+  padding:1.2rem;
+  cursor:pointer;
+  box-shadow:0 0 20px rgba(0,238,255,.25);
+  transition:.3s;
+}
+.card:hover{transform:scale(1.06)}
+.card h4{margin:0;color:#00eaff}
 
-  /* TOP BUTTONS */
-  .top-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-    margin-top: 10px;
-  }
-
-  .top-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #0088cc;
-    padding: 0.6rem 1.2rem;
-    border-radius: 50px;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    box-shadow: 0 0 15px rgba(0, 174, 255, 0.5);
-    transition: 0.3s;
-  }
-
-  .top-btn:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 25px rgba(0, 174, 255, 0.8);
-  }
-
-  .top-btn img {
-    width: 22px;
-  }
-
-  /* SMALL TITLE */
-  h3 {
-    font-size: 1.4rem;
-    margin-top: 5px;
-    text-shadow: 0 0 15px #00bfff;
-  }
-
-  /* GRID */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 1rem;
-    padding: 20px;
-    margin-top: 10px;
-  }
-
-  .card {
-    background: linear-gradient(145deg, #00182e, #002b55);
-    border: 2px solid #00eaff;
-    border-radius: 15px;
-    padding: 1.2rem;
-    cursor: pointer;
-    text-align: center;
-    box-shadow: 0 0 20px rgba(0, 238, 255, 0.25);
-    transition: 0.3s;
-  }
-
-  .card:hover {
-    transform: scale(1.06);
-    box-shadow: 0 0 35px rgba(0,238,255,0.7);
-    border-color: #33ccff;
-  }
-
-  .card h4 {
-    margin: 0;
-    font-size: 1.1rem;
-    color: #00eaff;
-    text-shadow: 0 0 10px #00bfff;
-  }
-
-  /* POPUP */
-  .popup {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    backdrop-filter: blur(6px);
-    background: rgba(0,0,0,0.65);
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .popup.active {
-    display: flex;
-  }
-
-  .popup-content {
-    background: #001a33;
-    padding: 25px;
-    border-radius: 15px;
-    width: 85%;
-    max-width: 350px;
-    border: 2px solid #00eaff;
-    box-shadow: 0 0 35px rgba(0,238,255,0.7);
-  }
-
-  .popup-content h2 {
-    margin-top: 0;
-    color: #00eaff;
-    text-shadow: 0 0 10px #00bfff;
-  }
-
-  .links a {
-    display: block;
-    text-decoration: none;
-    color: white;
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 8px;
-    background: #003b66;
-    border: 1px solid #00eaff;
-    transition: 0.3s;
-  }
-
-  .links a:hover {
-    background: #005c99;
-  }
-
-  .close-btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #ff004c;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .close-btn:hover {
-    background: #ff3369;
-  }
-
-  footer {
-    margin-top: 30px;
-    padding-bottom: 25px;
-    opacity: 0.8;
-  }
-
+.popup{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(6px);
+  justify-content:center;
+  align-items:center;
+}
+.popup.active{display:flex}
+.popup-content{
+  background:#001a33;
+  padding:25px;
+  border-radius:15px;
+  width:85%;
+  max-width:350px;
+  border:2px solid #00eaff;
+}
+.links a{
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  background:#003b66;
+  border:1px solid #00eaff;
+  border-radius:8px;
+  color:#fff;
+  text-decoration:none;
+}
+.close-btn{
+  margin-top:15px;
+  padding:10px 20px;
+  background:#ff004c;
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  font-weight:bold;
+}
+footer{margin:30px 0;opacity:.8}
 </style>
 </head>
 
 <body>
 
-<!-- TOP TELEGRAM BUTTONS -->
 <div class="top-buttons">
   <a class="top-btn" href="https://t.me/+NGUSfa7ns8c4OTll" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-    Join Channel
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">Join Channel
   </a>
-
   <a class="top-btn" href="https://t.me/xdsonic" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">
-    Owner Contact
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg">Owner
   </a>
 </div>
 
 <h3>ᯓ★ᗰᗩᗪ ᙭ ՏOᑎIᑕ</h3>
 
-<!-- MAIN GRID -->
 <div class="grid">
+  <div class="card" onclick="openPopup('ALLEN')"><h4>ALEXA TESTS</h4></div>
+  <div class="card" onclick="openPopup('bioxneet')"><h4>BIO ALEXA TEST</h4></div>
+  <div class="card" onclick="openPopup('yakeen')"><h4>YAKEEN 2026</h4></div>
 
-  <div class="card" onclick="openPopup('ALLEN')">
-    <h4>ALEXA TESTS</h4>
-  </div>
-
-  <div class="card" onclick="openPopup('bioxneet')">
-    <h4>BIO ALEXA TEST</h4>
-  </div>
-
-  <div class="card" onclick="openPopup('yakeen')">
-    <h4>YAKEEN TEST</h4>
-  </div>
-
-</div>
-
-<!-- POPUP - ALLEN -->
-<div class="popup" id="popup-ALLEN">
-  <div class="popup-content">
-    <h2>ALEXA TEST</h2>
-
-    <div class="links">
-      <a href="allen/allen1.html">🧾 TEST 1</a>
-    </div>
-
-    <button class="close-btn" onclick="closePopup('ALLEN')">❌ CLOSE</button>
+  <!-- 🔥 NEW CARD -->
+  <div class="card" onclick="openPopup('yakeen2025')">
+    <h4>🔥 YAKEEN NEET<br>GUJARATI 2025</h4>
   </div>
 </div>
 
-<!-- POPUP - BIO X NEET -->
-<div class="popup" id="popup-bioxneet">
+<!-- YAKEEN 2025 POPUP -->
+<div class="popup" id="popup-yakeen2025">
   <div class="popup-content">
-    <h2>BIO ALEXA TEST</h2>
-
+    <h2>YAKEEN NEET GUJARATI 2025</h2>
     <div class="links">
-      <a href="bioxneet/biox1.html">Animal Kingdom</a>
-      <a href="allen/allen2.html">Anatomy Of Flowering Plants</a>
+      <a href="https://quizard-new-v3-x-af208a2e8b47.herokuapp.com/batch/65dc520f8862110018b2ab1d/Yakeen%20NEET%20Gujarati%202025/batch_test" target="_blank">
+        🧾 OPEN ALL TESTS
+      </a>
     </div>
-
-    <button class="close-btn" onclick="closePopup('bioxneet')">❌ CLOSE</button>
-  </div>
-</div>
-
-<!-- POPUP - YAKEEN -->
-<div class="popup" id="popup-yakeen">
-  <div class="popup-content">
-    <h2>YAKEEN GUJARATI 2026</h2>
-
-    <div class="links">
-      <a href="yakeen/test1.html">TEST 1(PHY)</a>
-      <a href="yakeen/test2.html">TEST 1(CHEM)</a>
-      <a href="yakeen/test3.html">TEST 1(BOT)</a>
-      <a href="yakeen/test4.html">TEST 1(ZOO)</a>
-    </div>
-
-    <button class="close-btn" onclick="closePopup('yakeen')">❌ CLOSE</button>
+    <button class="close-btn" onclick="closePopup('yakeen2025')">❌ CLOSE</button>
   </div>
 </div>
 
 <footer>© 2025 XD TEAM</footer>
 
 <script>
-  function openPopup(id) {
-    document.getElementById("popup-" + id).classList.add("active");
-  }
-  function closePopup(id) {
-    document.getElementById("popup-" + id).classList.remove("active");
-  }
+function openPopup(id){
+  document.getElementById("popup-"+id).classList.add("active");
+}
+function closePopup(id){
+  document.getElementById("popup-"+id).classList.remove("active");
+}
 </script>
 
 </body>
